@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>วิสาหกิจชุมชนร้อยพันมะพร้าว | 451-thanapong</title>
+  <meta name="description" content="ศูนย์กลางการตลาดดิจิทัลชุมชนแบบเชื่อมโยงหลายช่องทาง วิสาหกิจชุมชนร้อยพันมะพร้าว (Roi Phan Maprao Community Enterprise)">
+
+  <!-- Google Fonts: Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6.5.1 (Locked CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Tailwind CSS Configuration BEFORE Tailwind CDN -->
+  <script>
+    tailwind = {
+      config: {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Prompt', 'ui-sans-serif', 'system-ui', 'sans-serif']
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <!-- Tailwind CSS 3.4.17 (Locked CDN) -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+
+  <!-- Chart.js 4.4.1 (Locked CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    :root {
+      --bg-main: #FBF6E9;
+      --bg-card: #FFFDF7;
+      --bg-elevated: #F4EFE0;
+      --primary-green: #047857;
+      --accent-green: #10b981;
+      --coconut-brown: #92400e;
+      --coconut-dark: #6B4423;
+      --text-main: #1f2a24;
+      --text-muted: #4b5e53;
+      --border-color: #E7DFC8;
+      --shadow-soft: 0 10px 30px -5px rgba(107, 68, 35, 0.08), 0 4px 12px -2px rgba(4, 120, 87, 0.05);
+    }
+
+    html.dark {
+      --bg-main: #0d1712;
+      --bg-card: #14231b;
+      --bg-elevated: #1b2f24;
+      --primary-green: #34d399;
+      --accent-green: #10b981;
+      --coconut-brown: #fbbf24;
+      --coconut-dark: #f59e0b;
+      --text-main: #e8f3ec;
+      --text-muted: #9cb5a5;
+      --border-color: #2a4535;
+      --shadow-soft: 0 12px 32px -6px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: 'Prompt', ui-sans-serif, system-ui, sans-serif;
+      line-height: 1.65;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    [id] {
+      scroll-margin-top: 5.5rem;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
+      border-radius: 1rem;
+      transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .theme-card-hover:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-green);
+    }
+
+    .hero-mesh {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(16, 185, 129, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 88% 22%, rgba(146, 64, 14, 0.12) 0%, transparent 48%),
+        radial-gradient(circle at 50% 85%, rgba(4, 120, 87, 0.10) 0%, transparent 50%),
+        var(--bg-card);
+    }
+
+    html.dark .hero-mesh {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(52, 211, 153, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 88% 22%, rgba(251, 191, 36, 0.10) 0%, transparent 48%),
+        radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+        var(--bg-card);
+    }
+
+    .title-clamp {
+      font-size: clamp(1.5rem, 3.2vw, 2.35rem);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .section-title-clamp {
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    /* Placeholder / Awaiting Data Badge */
+    .placeholder-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      background-color: rgba(148, 163, 184, 0.18);
+      color: #64748b;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      white-space: nowrap;
+    }
+
+    html.dark .placeholder-badge {
+      background-color: rgba(148, 163, 184, 0.14);
+      color: #cbd5e1;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    /* Responsive Table to Stacked Cards on < 768px */
+    @media (max-width: 767.98px) {
+      .verified-table thead {
+        display: none;
+      }
+      .verified-table,
+      .verified-table tbody,
+      .verified-table tr,
+      .verified-table td {
+        display: block;
+        width: 100%;
+      }
+      .verified-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        background-color: var(--bg-card);
+        padding: 0.75rem 1rem;
+        box-shadow: var(--shadow-soft);
+      }
+      .verified-table td {
+        padding: 0.55rem 0;
+        border-bottom: 1px dashed var(--border-color);
+        text-align: left !important;
+      }
+      .verified-table td:last-child {
+        border-bottom: none;
+      }
+      .verified-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 0.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+    }
+
+    /* 3D Flipbook Styles */
+    .flipbook-stage {
+      perspective: 1600px;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .flipbook-book {
+      position: relative;
+      width: 100%;
+      min-height: 430px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transform-style: preserve-3d;
+      border-radius: 1rem;
+      box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.25);
+      border: 2px solid var(--border-color);
+      background-color: var(--bg-card);
+      overflow: visible;
+    }
+
+    .flipbook-spine {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 6px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, rgba(107,68,35,0.25), rgba(107,68,35,0.55), rgba(107,68,35,0.25));
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .flipbook-page {
+      padding: 1.25rem;
+      background-color: var(--bg-card);
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .flipbook-page-left {
+      border-top-left-radius: 0.9rem;
+      border-bottom-left-radius: 0.9rem;
+      transform-origin: right center;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .flipbook-page-right {
+      border-top-right-radius: 0.9rem;
+      border-bottom-right-radius: 0.9rem;
+      transform-origin: left center;
+    }
+
+    .flipbook-book.turning-next .flipbook-page-right {
+      transform: rotateY(-110deg);
+      opacity: 0.35;
+    }
+
+    .flipbook-book.turning-prev .flipbook-page-left {
+      transform: rotateY(110deg);
+      opacity: 0.35;
+    }
+
+    @media (max-width: 639.98px) {
+      .flipbook-book {
+        min-height: 360px;
+      }
+      .flipbook-page {
+        padding: 0.65rem;
+        font-size: 0.82rem;
+      }
+    }
+
+    /* Fade-in Reveal Animation */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Focus Ring Accessibility */
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--accent-green);
+      outline-offset: 2px;
+    }
+
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .theme-card-hover:hover {
+        transform: none !important;
+      }
+      .reveal-item {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .flipbook-book.turning-next .flipbook-page-right,
+      .flipbook-book.turning-prev .flipbook-page-left {
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-emerald-600 selection:text-white">
+  <noscript>
+    <div class="bg-red-700 text-white p-4 text-center font-semibold">
+      เว็บไซต์นี้จำเป็นต้องเปิดใช้งาน JavaScript เพื่อแสดงผลข้อมูลจริงจากระบบ กรุณาเปิดใช้งาน JavaScript ในเบราว์เซอร์ของคุณ
+    </div>
+  </noscript>
+
+  <!-- ==================== ส่วนที่ 1: แถบเมนูบน (Top Navbar) ==================== -->
+  <header id="top-navbar" class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#FFFDF7]/90 dark:bg-[#14231b]/90 border-b border-[#E7DFC8] dark:border-[#2a4535] transition-shadow duration-200">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5">
+      <div class="flex items-center justify-between gap-2">
+        <!-- ซ้าย: โลโก้ + ชื่อชุมชน -->
+        <a href="#hero-section" class="flex items-center gap-2.5 min-w-0 group rounded-xl p-1">
+          <div id="nav-logo-wrap" class="w-10 h-10 rounded-full bg-emerald-700 dark:bg-emerald-600 text-white flex items-center justify-center text-xl shadow-sm shrink-0 overflow-hidden">
+            <span aria-hidden="true">🥥</span>
+          </div>
+          <div class="min-w-0">
+            <div id="nav-community-name" class="font-bold text-sm sm:text-base text-[#1f2a24] dark:text-[#e8f3ec] truncate group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors"></div>
+            <div id="nav-web-name" class="text-[11px] text-[#4b5e53] dark:text-[#9cb5a5] truncate"></div>
+          </div>
+        </a>
+
+        <!-- กลาง: ป้ายไฟ 5 Channels Live -->
+        <div class="flex items-center shrink-0">
+          <div class="inline-flex items-center gap-2 px-2.5 sm:px-3.5 py-1 rounded-full bg-emerald-500/15 dark:bg-emerald-400/15 border border-emerald-600/30 dark:border-emerald-400/30 text-emerald-800 dark:text-emerald-300 text-xs font-semibold animate-pulse" aria-label="สถานะระบบ 5 Channels Live">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span class="hidden sm:inline">5 Channels Live</span>
+            <span class="sm:hidden">5 Live</span>
+          </div>
+        </div>
+
+        <!-- ขวา: ปุ่มลัด 4 ปุ่ม (Desktop) + ปุ่มสลับธีม -->
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <nav class="hidden lg:flex items-center gap-1.5" aria-label="ทางลัดหลัก">
+            <button type="button" id="nav-btn-chatbot" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white transition">
+              <i class="fa-solid fa-robot" aria-hidden="true"></i>
+              <span>AI Chatbot</span>
+            </button>
+            <button type="button" id="nav-btn-360" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] hover:border-emerald-500 transition">
+              <i class="fa-solid fa-street-view text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+              <span>360 องศา</span>
+            </button>
+            <button type="button" id="nav-btn-oncyber" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] hover:border-sky-500 transition">
+              <i class="fa-solid fa-vr-cardboard text-sky-600 dark:text-sky-400" aria-hidden="true"></i>
+              <span>Oncyber</span>
+            </button>
+            <button type="button" id="nav-btn-ecatalog" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] hover:border-emerald-500 transition">
+              <i class="fa-solid fa-book-open text-emerald-700 dark:text-emerald-400" aria-hidden="true"></i>
+              <span>E-catalog</span>
+            </button>
+          </nav>
+
+          <!-- ปุ่ม Dark / Light Mode -->
+          <button type="button" id="theme-toggle-btn" aria-label="สลับโหมดมืดและโหมดสว่าง" aria-pressed="false" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] text-amber-700 dark:text-amber-300 flex items-center justify-center hover:border-emerald-500 transition">
+            <i id="theme-toggle-icon" class="fa-solid fa-moon text-base" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- แถวปุ่มลัดสำหรับจอเล็ก/แท็บเล็ต (< lg) -->
+      <nav class="flex lg:hidden items-center gap-1.5 mt-2 pt-2 border-t border-[#E7DFC8]/70 dark:border-[#2a4535]/70 overflow-x-auto no-scrollbar" aria-label="ทางลัดหลักมือถือ">
+        <button type="button" id="nav-btn-chatbot-m" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-700 text-white shrink-0">
+          <i class="fa-solid fa-robot" aria-hidden="true"></i>
+          <span>AI Chatbot</span>
+        </button>
+        <button type="button" id="nav-btn-360-m" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] shrink-0">
+          <i class="fa-solid fa-street-view text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+          <span>360 องศา</span>
+        </button>
+        <button type="button" id="nav-btn-oncyber-m" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] shrink-0">
+          <i class="fa-solid fa-vr-cardboard text-sky-600 dark:text-sky-400" aria-hidden="true"></i>
+          <span>Oncyber</span>
+        </button>
+        <button type="button" id="nav-btn-ecatalog-m" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] shrink-0">
+          <i class="fa-solid fa-book-open text-emerald-700 dark:text-emerald-400" aria-hidden="true"></i>
+          <span>E-catalog</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-10 space-y-12 sm:space-y-16">
+
+    <!-- ==================== ส่วนที่ 2: แบนเนอร์หัวเรื่อง (Hero Card) ==================== -->
+    <section id="hero-section" class="reveal-item">
+      <div class="theme-card hero-mesh relative overflow-hidden p-5 sm:p-8 lg:p-10">
+        <!-- ลายใบมะพร้าว Inline SVG ความโปร่งใสต่ำ -->
+        <svg class="pointer-events-none absolute -top-10 -right-10 w-72 h-72 text-emerald-800/5 dark:text-emerald-300/5" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
+          <path d="M180,20 C120,25 65,65 20,180 C45,130 80,95 130,80 C90,105 60,140 40,185 C85,145 130,115 175,95 C140,125 110,155 85,190 C135,160 175,120 190,60 Z"/>
+        </svg>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          <!-- ฝั่งซ้าย -->
+          <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+            <div class="space-y-3">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/10 dark:bg-amber-400/15 text-[#92400e] dark:text-amber-300 text-xs font-semibold">
+                <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                <span>ศูนย์กลางการตลาดดิจิทัลชุมชนแบบเชื่อมโยงหลายช่องทาง (Omnichannel Hub)</span>
+              </div>
+              <h1 id="hero-title-th" class="title-clamp text-[#047857] dark:text-[#34d399]"></h1>
+              <p id="hero-title-en" class="text-base sm:text-lg font-medium text-[#6B4423] dark:text-amber-300"></p>
+              <p id="hero-description" class="text-sm sm:text-base text-[#4b5e53] dark:text-[#9cb5a5] leading-relaxed"></p>
+            </div>
+
+            <!-- กล่องตัวตน 3 กล่อง -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div class="p-3.5 rounded-2xl bg-[#FFFDF7]/90 dark:bg-[#1b2f24]/90 border border-[#E7DFC8] dark:border-[#2a4535] shadow-sm">
+                <div class="flex items-center gap-2 text-xs font-medium text-[#4b5e53] dark:text-[#9cb5a5]">
+                  <i class="fa-solid fa-id-card text-emerald-700 dark:text-emerald-400" aria-hidden="true"></i>
+                  <span>รหัสนักศึกษา</span>
+                </div>
+                <div id="identity-student-id" class="mt-1 font-bold text-sm sm:text-base text-[#1f2a24] dark:text-[#e8f3ec]"></div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-[#FFFDF7]/90 dark:bg-[#1b2f24]/90 border border-[#E7DFC8] dark:border-[#2a4535] shadow-sm">
+                <div class="flex items-center gap-2 text-xs font-medium text-[#4b5e53] dark:text-[#9cb5a5]">
+                  <i class="fa-solid fa-user-graduate text-emerald-700 dark:text-emerald-400" aria-hidden="true"></i>
+                  <span>ชื่อ-นามสกุล</span>
+                </div>
+                <div id="identity-student-name" class="mt-1 font-bold text-sm sm:text-base text-[#1f2a24] dark:text-[#e8f3ec]"></div>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-[#FFFDF7]/90 dark:bg-[#1b2f24]/90 border border-[#E7DFC8] dark:border-[#2a4535] shadow-sm">
+                <div class="flex items-center gap-2 text-xs font-medium text-[#4b5e53] dark:text-[#9cb5a5]">
+                  <i class="fa-solid fa-people-group text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+                  <span>กลุ่มชุมชน / OTOP</span>
+                </div>
+                <div id="identity-group-label" class="mt-1 font-bold text-sm sm:text-base text-[#1f2a24] dark:text-[#e8f3ec]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ฝั่งขวา: จอมอนิเตอร์ Channel สื่อสาร -->
+          <div class="lg:col-span-5 flex flex-col justify-between rounded-2xl bg-[#13221a] dark:bg-[#09120d] text-slate-100 p-4 sm:p-5 border border-emerald-800/50 shadow-xl">
+            <div>
+              <!-- แถบหัวมอนิเตอร์ 3 จุด -->
+              <div class="flex items-center justify-between pb-3 mb-3 border-b border-emerald-800/60">
+                <div class="flex items-center gap-1.5" aria-hidden="true">
+                  <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                  <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                  <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                </div>
+                <div id="hero-monitor-title" class="text-xs sm:text-sm font-bold text-emerald-300 tracking-wide"></div>
+              </div>
+
+              <!-- รายการ 5 ช่องทาง -->
+              <div id="hero-channels-list" class="space-y-2.5 my-2"></div>
+            </div>
+
+            <!-- ปุ่มเปิดอ่าน e-catalog ด้านล่างสุด -->
+            <div class="mt-4 pt-3 border-t border-emerald-800/60">
+              <button type="button" id="hero-btn-ecatalog" class="w-full py-2.5 px-4 rounded-xl font-semibold text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-md flex items-center justify-center gap-2 transition">
+                <span>📖 เปิดอ่าน e-catalog (หนังสือออนไลน์)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ส่วนที่ 3: แถบความโปร่งใสและตารางสถิติจริง ==================== -->
+    <section id="verified-data-section" class="reveal-item space-y-5">
+      <!-- แถบประกาศ Verified Real Data -->
+      <div class="p-4 sm:p-5 rounded-2xl bg-emerald-600/10 dark:bg-emerald-500/15 border-2 border-emerald-600/40 dark:border-emerald-400/40 flex items-start sm:items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-emerald-700 dark:bg-emerald-500 text-white dark:text-slate-950 flex items-center justify-center shrink-0 text-lg shadow">
+          <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        </div>
+        <div class="text-sm sm:text-base font-medium text-[#1f2a24] dark:text-[#e8f3ec]">
+          <span id="verified-banner-text"></span>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <h2 class="section-title-clamp text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+            <i class="fa-solid fa-table-list text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+            <span>ตารางตรวจสอบสถิติจริงจากระบบ 100% (Verified Channel Live Data)</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-[#4b5e53] dark:text-[#9cb5a5]">แสดงข้อมูลจริงทุกช่องทางจากโครงสร้างข้อมูลกลาง ไม่มีการสุ่มตัวเลขหรือแต่งสรรพคุณ</p>
+        </div>
+      </div>
+
+      <!-- ตาราง 5 คอลัมน์ 5 แถว -->
+      <div class="theme-card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="verified-table w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#F4EFE0] dark:bg-[#1b2f24] border-b border-[#E7DFC8] dark:border-[#2a4535] text-xs sm:text-sm font-semibold text-[#1f2a24] dark:text-[#e8f3ec]">
+                <th scope="col" class="py-3.5 px-4 w-[18%]">ช่องทาง (Channel)</th>
+                <th scope="col" class="py-3.5 px-4 w-[18%]">URL (คลิกได้จริง)</th>
+                <th scope="col" class="py-3.5 px-4 w-[22%]">สถิติจริง (Verified Stats)</th>
+                <th scope="col" class="py-3.5 px-4 w-[12%]">สื่อในระบบ (Media in System)</th>
+                <th scope="col" class="py-3.5 px-4 w-[30%]">ฟังก์ชัน / สรรพคุณหลัก (Main Function &amp; Product Benefits)</th>
+              </tr>
+            </thead>
+            <tbody id="verified-table-body" class="divide-y divide-[#E7DFC8] dark:divide-[#2a4535] text-xs sm:text-sm"></tbody>
+          </table>
+        </div>
+        <div class="px-4 py-3 bg-[#F4EFE0]/60 dark:bg-[#1b2f24]/60 border-t border-[#E7DFC8] dark:border-[#2a4535] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#4b5e53] dark:text-[#9cb5a5]">
+          <div id="table-data-as-of" class="font-medium"></div>
+          <div><i class="fa-solid fa-magnifying-glass-chart mr-1" aria-hidden="true"></i>ตรวจสอบข้อมูลได้จาก URL ที่ระบุในตาราง</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ส่วนที่ 4: การ์ดสถิติ 6 มิติ ==================== -->
+    <section id="stats-cards-section" class="reveal-item space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <h2 class="section-title-clamp text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+            <span>สรุปสถิติสำคัญ 6 มิติ (6-Dimension Live Metrics)</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-[#4b5e53] dark:text-[#9cb5a5]">คำนวณสดด้วย JavaScript จากค่าจริงใน SITE_CONFIG</p>
+        </div>
+      </div>
+
+      <div id="stats-6-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3.5 sm:gap-4"></div>
+    </section>
+
+    <!-- ==================== ส่วนที่ 5: ระบบ 4 แท็บเจาะลึก ==================== -->
+    <section id="deep-dive-tabs-section" class="reveal-item space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <h2 class="section-title-clamp text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+            <i class="fa-solid fa-layer-group text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+            <span>เจาะลึกระบบการตลาดดิจิทัล 4 มิติ (Interactive Omnichannel Explorer)</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-[#4b5e53] dark:text-[#9cb5a5]">เลือกแท็บเพื่อสำรวจช่องทางดิจิทัล กราฟวิเคราะห์ หนังสือ E-catalog และมุมมอง 360°</p>
+        </div>
+      </div>
+
+      <!-- ปุ่มสลับ 4 แท็บ (Accessible Tablist) -->
+      <div role="tablist" aria-label="หมวดหมู่ข้อมูลเจาะลึก" class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 p-1.5 rounded-2xl bg-[#F4EFE0] dark:bg-[#1b2f24] border border-[#E7DFC8] dark:border-[#2a4535]">
+        <button type="button" role="tab" id="tab-btn-1" aria-selected="true" aria-controls="tab-panel-1" tabindex="0" data-tab="1" class="tab-trigger flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition">
+          <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+          <span>1) เจาะลึก 5 ช่องทางดิจิทัล</span>
+        </button>
+        <button type="button" role="tab" id="tab-btn-2" aria-selected="false" aria-controls="tab-panel-2" tabindex="-1" data-tab="2" class="tab-trigger flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition">
+          <i class="fa-solid fa-chart-column" aria-hidden="true"></i>
+          <span>2) Analytics Dashboard</span>
+        </button>
+        <button type="button" role="tab" id="tab-btn-3" aria-selected="false" aria-controls="tab-panel-3" tabindex="-1" data-tab="3" class="tab-trigger flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition">
+          <i class="fa-solid fa-book-open-reader" aria-hidden="true"></i>
+          <span>3) E-catalog / E-Book</span>
+        </button>
+        <button type="button" role="tab" id="tab-btn-4" aria-selected="false" aria-controls="tab-panel-4" tabindex="-1" data-tab="4" class="tab-trigger flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold transition">
+          <i class="fa-solid fa-compass" aria-hidden="true"></i>
+          <span>4) สินค้าแนะนำ / ท่องเที่ยว 360°</span>
+        </button>
+      </div>
+
+      <!-- แท็บ 1: เจาะลึก 5 ช่องทางดิจิทัล -->
+      <div role="tabpanel" id="tab-panel-1" aria-labelledby="tab-btn-1" class="tab-panel transition-opacity duration-200">
+        <div id="tab1-channels-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </div>
+
+      <!-- แท็บ 2: Analytics Dashboard -->
+      <div role="tabpanel" id="tab-panel-2" aria-labelledby="tab-btn-2" class="tab-panel hidden transition-opacity duration-200">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- กราฟ 1: Doughnut -->
+          <div class="theme-card p-5 sm:p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base sm:text-lg text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+                <span>สัดส่วนคอนเทนต์จริง 5 ช่องทาง (Content Distribution)</span>
+              </h3>
+              <p class="text-xs text-[#4b5e53] dark:text-[#9cb5a5] mt-1">เปรียบเทียบจำนวนชิ้นงานจริงในแต่ละแพลตฟอร์ม</p>
+            </div>
+            <div id="doughnut-chart-wrap" class="relative h-72 w-full my-4 flex items-center justify-center">
+              <canvas id="contentDoughnutChart" aria-label="กราฟวงกลมแสดงสัดส่วนคอนเทนต์ 5 ช่องทาง" role="img"></canvas>
+            </div>
+            <div id="doughnut-chart-summary" class="pt-3 border-t border-[#E7DFC8] dark:border-[#2a4535] text-xs sm:text-sm text-center font-medium"></div>
+          </div>
+
+          <!-- กราฟ 2: Bar -->
+          <div class="theme-card p-5 sm:p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-base sm:text-lg text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+                <i class="fa-solid fa-chart-simple text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+                <span>เปรียบเทียบการเข้าถึงและ Engagement จริง (Verified Engagement)</span>
+              </h3>
+              <p class="text-xs text-[#4b5e53] dark:text-[#9cb5a5] mt-1">แสดงเฉพาะค่าสถิติจริงจาก YouTube, TikTok และ Instagram</p>
+            </div>
+            <div id="bar-chart-wrap" class="relative h-72 w-full my-4 flex items-center justify-center">
+              <canvas id="engagementBarChart" aria-label="กราฟแท่งเปรียบเทียบสถิติการเข้าถึง" role="img"></canvas>
+            </div>
+            <div id="bar-chart-summary" class="pt-3 border-t border-[#E7DFC8] dark:border-[#2a4535] text-xs text-[#4b5e53] dark:text-[#9cb5a5]"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- แท็บ 3: E-catalog / E-Book -->
+      <div role="tabpanel" id="tab-panel-3" aria-labelledby="tab-btn-3" class="tab-panel hidden transition-opacity duration-200 space-y-6">
+        <!-- กรณีมี ebookEmbedUrl จะแสดงกล่องฝัง Heyzine ด้านบน -->
+        <div id="ebook-embed-container" class="hidden theme-card p-4 sm:p-6 space-y-3">
+          <h3 class="font-bold text-base sm:text-lg text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+            <i class="fa-solid fa-book-bookmark" aria-hidden="true"></i>
+            <span>E-Book ออนไลน์ฉบับฝัง (Embedded Interactive Flipbook)</span>
+          </h3>
+          <div class="aspect-video w-full rounded-xl overflow-hidden border border-[#E7DFC8] dark:border-[#2a4535] bg-black/5">
+            <iframe id="ebook-embed-iframe" title="E-Book วิสาหกิจชุมชนร้อยพันมะพร้าว" class="w-full h-full" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <p class="text-xs text-[#4b5e53] dark:text-[#9cb5a5]">หากหน้าต่าง E-Book ไม่แสดงผลในกรอบ สามารถกดปุ่ม "เปิดอ่าน E-Book ตัวเต็ม" ด้านล่างเพื่อเปิดในแท็บใหม่</p>
+        </div>
+
+        <!-- 3D Flipbook จำลอง 2 หน้าคู่ -->
+        <div class="theme-card p-4 sm:p-8 space-y-6" id="flipbook-container" tabindex="0" aria-label="แคตตาล็อกสินค้า 3D Flipbook ใช้ปุ่มลูกศรซ้ายขวาเพื่อพลิกหน้าได้">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E7DFC8] dark:border-[#2a4535] pb-4">
+            <div>
+              <h3 class="font-bold text-base sm:text-lg text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+                <i class="fa-solid fa-book-open text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+                <span>3D Interactive Product Flipbook (แคตตาล็อกสินค้าจริง 10 รายการ)</span>
+              </h3>
+              <p class="text-xs text-[#4b5e53] dark:text-[#9cb5a5]">พลิกดูสินค้าทีละคู่ (ซ้าย-ขวา) รองรับการกดปุ่มหรือใช้ปุ่มลูกศรซ้าย/ขวาบนคีย์บอร์ด</p>
+            </div>
+            <div class="flex items-center gap-2 self-start sm:self-auto">
+              <button type="button" id="flip-prev-btn" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] hover:border-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed transition">
+                ◀ หน้าก่อนหน้า
+              </button>
+              <span id="flip-spread-indicator" class="px-3 py-1.5 rounded-xl bg-emerald-600/10 dark:bg-emerald-400/15 text-emerald-800 dark:text-emerald-300 font-bold text-xs sm:text-sm">
+                คู่ที่ 1 / 5
+              </span>
+              <button type="button" id="flip-next-btn" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FBF6E9] dark:bg-[#1b2f24] hover:border-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed transition">
+                หน้าถัดไป ▶
+              </button>
+            </div>
+          </div>
+
+          <!-- ตัวหนังสือ 2 หน้าคู่ -->
+          <div class="flipbook-stage">
+            <div id="flipbook-book" class="flipbook-book">
+              <div class="flipbook-spine" aria-hidden="true"></div>
+              <div id="flip-page-left" class="flipbook-page flipbook-page-left"></div>
+              <div id="flip-page-right" class="flipbook-page flipbook-page-right"></div>
+            </div>
+          </div>
+
+          <!-- ปุ่มเปิดอ่าน E-Book ตัวเต็ม และปุ่มสั่งซื้อ -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <button type="button" id="tab3-open-ebook-btn" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white shadow-md flex items-center justify-center gap-2 transition">
+              <i class="fa-solid fa-book-open-reader" aria-hidden="true"></i>
+              <span id="tab3-open-ebook-label">เปิดอ่าน E-Book ตัวเต็ม</span>
+            </button>
+            <button type="button" id="tab3-order-website-btn" class="w-full sm:w-auto px-6 py-3 rounded-xl font-semibold text-sm border-2 border-emerald-700 dark:border-emerald-400 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-700/10 flex items-center justify-center gap-2 transition">
+              <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+              <span>สั่งซื้อสินค้าบนเว็บไซต์หลัก</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- แท็บ 4: สินค้าแนะนำ / ท่องเที่ยว 360° -->
+      <div role="tabpanel" id="tab-panel-4" aria-labelledby="tab-btn-4" class="tab-panel hidden transition-opacity duration-200 space-y-10">
+        <!-- ส่วนที่ 4.1: สถานที่ท่องเที่ยวและศูนย์เรียนรู้ 360° -->
+        <div class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 class="font-bold text-base sm:text-lg text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+                <i class="fa-solid fa-vr-cardboard text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+                <span>สำรวจสถานที่ท่องเที่ยวและศูนย์เรียนรู้ชุมชน 360° (Interactive 360° &amp; Metaverse)</span>
+              </h3>
+              <p class="text-xs text-[#4b5e53] dark:text-[#9cb5a5]">สัมผัสประสบการณ์เสมือนจริงของวิสาหกิจชุมชนร้อยพันมะพร้าว</p>
+            </div>
+            <button type="button" id="tab4-drive360-btn" class="self-start sm:self-auto px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-amber-700 hover:bg-amber-800 text-white shadow flex items-center gap-2 transition">
+              <i class="fa-brands fa-google-drive" aria-hidden="true"></i>
+              <span>ดูวิดีโอ 360° ทั้งหมดบน Google Drive</span>
+            </button>
+          </div>
+
+          <div id="tab4-attractions-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-5"></div>
+        </div>
+
+        <!-- ส่วนที่ 4.2: สินค้าแนะนำทั้ง 10 รายการ -->
+        <div class="space-y-4 pt-4 border-t border-[#E7DFC8] dark:border-[#2a4535]">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div>
+              <h3 class="font-bold text-base sm:text-lg text-[#047857] dark:text-[#34d399] flex items-center gap-2">
+                <i class="fa-solid fa-basket-shopping text-amber-700 dark:text-amber-400" aria-hidden="true"></i>
+                <span>ผลิตภัณฑ์แปรรูปจากมะพร้าวพร้อมจำหน่าย (<span id="tab4-product-count"></span> รายการ)</span>
+              </h3>
+              <p class="text-xs text-[#4b5e53] dark:text-[#9cb5a5]">ข้อมูลสินค้าและราคาตรงตามหน้าร้านจริง https://pkncoco.com/shop</p>
+            </div>
+            <!-- ตัวกรองหมวดสินค้า -->
+            <div id="product-filter-bar" class="flex flex-wrap gap-1.5" role="group" aria-label="กรองหมวดหมู่สินค้า"></div>
+          </div>
+
+          <div id="tab4-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== ส่วนท้ายหน้า (Footer) ==================== -->
+  <footer class="mt-16 border-t border-[#E7DFC8] dark:border-[#2a4535] bg-[#F4EFE0]/80 dark:bg-[#14231b]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pb-6 border-b border-[#E7DFC8] dark:border-[#2a4535]">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center text-base" aria-hidden="true">🥥</span>
+            <span id="footer-community-name" class="font-bold text-base text-[#047857] dark:text-[#34d399]"></span>
+          </div>
+          <p id="footer-community-en" class="text-xs text-[#4b5e53] dark:text-[#9cb5a5]"></p>
+          <p id="footer-address" class="text-xs sm:text-sm text-[#1f2a24] dark:text-[#e8f3ec] pt-1"></p>
+        </div>
+
+        <div class="space-y-2 text-xs sm:text-sm">
+          <div class="font-bold text-[#6B4423] dark:text-amber-300">ข้อมูลติดต่อชุมชน</div>
+          <div id="footer-phones" class="space-y-1"></div>
+          <div id="footer-email"></div>
+          <div class="pt-1">
+            <button type="button" id="footer-fb-btn" class="inline-flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 hover:underline font-medium">
+              <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+              <span>Facebook วิสาหกิจชุมชนร้อยพันมะพร้าว</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs sm:text-sm md:text-right">
+          <div class="font-bold text-[#6B4423] dark:text-amber-300">ข้อมูลผู้จัดทำโครงการ</div>
+          <p id="footer-student-credit" class="font-semibold text-[#1f2a24] dark:text-[#e8f3ec]"></p>
+          <p id="footer-web-label" class="text-xs text-[#4b5e53] dark:text-[#9cb5a5]"></p>
+        </div>
+      </div>
+
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#4b5e53] dark:text-[#9cb5a5]">
+        <div>© <span id="footer-copy-name"></span> — Verified Omnichannel Community Hub</div>
+        <div>กด <kbd class="px-1.5 py-0.5 rounded bg-black/10 dark:bg-white/10 font-mono text-[11px]">Ctrl+Shift+D</kbd> เพื่อตรวจสอบสถานะ SITE_CONFIG</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== ส่วนที่ 6: วิดเจ็ตผู้ช่วย AI Chatbot ==================== -->
+  <div class="fixed bottom-4 right-4 z-50 flex flex-col items-end">
+    <!-- หน้าต่างแชทบอท -->
+    <section id="chatbot-window" aria-label="หน้าต่างผู้ช่วยแชทบอทร้อยพันมะพร้าว" class="hidden mb-3 w-[min(92vw,380px)] h-[min(80vh,560px)] rounded-2xl bg-[#FFFDF7] dark:bg-[#14231b] border-2 border-emerald-700/40 dark:border-emerald-500/40 shadow-2xl flex flex-col overflow-hidden transition-all duration-200 origin-bottom-right">
+      <!-- หัวข้อแชท -->
+      <div class="px-4 py-3 bg-gradient-to-r from-emerald-800 to-emerald-700 dark:from-emerald-900 dark:to-emerald-800 text-white flex items-center justify-between gap-2 shrink-0">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-base shrink-0" aria-hidden="true">🥥</span>
+          <div class="min-w-0">
+            <h2 id="chatbot-header-title" class="font-bold text-xs sm:text-sm truncate"></h2>
+            <div class="text-[11px] text-emerald-100 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 inline-block"></span>
+              <span>ตอบเฉพาะข้อมูลจริงของชุมชน 100%</span>
+            </div>
+          </div>
+        </div>
+        <button type="button" id="chatbot-close-btn" aria-label="ปิดหน้าต่างแชทบอท" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- การ์ดข้อมูลติดต่อ (แสดงตลอดใต้หัวข้อ) -->
+      <div class="px-3.5 py-2.5 bg-[#F4EFE0] dark:bg-[#1b2f24] border-b border-[#E7DFC8] dark:border-[#2a4535] text-[11px] sm:text-xs space-y-1.5 shrink-0">
+        <div class="flex items-start gap-1.5 text-[#1f2a24] dark:text-[#e8f3ec]">
+          <i class="fa-solid fa-location-dot text-emerald-700 dark:text-emerald-400 mt-0.5 shrink-0" aria-hidden="true"></i>
+          <span id="chatbot-contact-address" class="leading-snug"></span>
+        </div>
+        <div class="flex flex-wrap items-center gap-1.5">
+          <a id="chatbot-call-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-semibold transition">
+            <span id="chatbot-call-text"></span>
+          </a>
+          <button type="button" id="chatbot-maps-btn" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg border border-[#E7DFC8] dark:border-[#2a4535] bg-[#FFFDF7] dark:bg-[#14231b] font-semibold transition">
+            <span id="chatbot-maps-text">🗺️ เปิด Google Maps</span>
+          </button>
+          <a id="chatbot-email-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[#4b5e53] dark:text-[#9cb5a5] hover:underline ml-auto truncate"></a>
+        </div>
+      </div>
+
+      <!-- พื้นที่ข้อความสนทนา -->
+      <div id="chatbot-messages" aria-live="polite" class="flex-1 p-3.5 overflow-y-auto space-y-3 bg-[#FBF6E9]/60 dark:bg-[#0d1712]/60 text-xs sm:text-sm"></div>
+
+      <!-- ช่องพิมพ์ข้อความ -->
+      <form id="chatbot-form" class="p-2.5 bg-[#FFFDF7] dark:bg-[#14231b] border-t border-[#E7DFC8] dark:border-[#2a4535] flex items-center gap-2 shrink-0">
+        <input type="text" id="chatbot-input" placeholder="ถามชื่อสินค้า ราคา หรือวิธีสั่งซื้อ..." aria-label="พิมพ์คำถามสำหรับบอทร้อยพันมะพร้าว" autocomplete="off" class="flex-1 px-3 py-2 rounded-xl text-xs sm:text-sm bg-[#FBF6E9] dark:bg-[#1b2f24] border border-[#E7DFC8] dark:border-[#2a4535] text-[#1f2a24] dark:text-[#e8f3ec] placeholder:text-[#4b5e53]/70 dark:placeholder:text-[#9cb5a5]/70">
+        <button type="submit" id="chatbot-send-btn" aria-label="ส่งข้อความ" class="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm flex items-center gap-1 shrink-0 transition">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          <span>ส่ง</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- ปุ่มกลมลอยเปิด/ปิดแชทบอท -->
+    <button type="button" id="chatbot-fab" aria-label="เปิดหรือปิดผู้ช่วย AI Chatbot" aria-expanded="false" class="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 hover:from-emerald-500 hover:to-emerald-700 text-white shadow-xl flex items-center justify-center text-2xl border-2 border-white/80 dark:border-emerald-300/40 transition-transform duration-200 hover:scale-105">
+      <i id="chatbot-fab-icon" class="fa-solid fa-comments" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <!-- ==================== Toast แจ้งเตือน ==================== -->
+  <div id="toast-container" role="status" aria-live="polite" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none flex flex-col items-center gap-2 w-[min(92vw,420px)]"></div>
+
+  <!-- ==================== แผงตรวจสอบ SITE_CONFIG (ซ่อนตามค่าเริ่มต้น เปิดด้วย Ctrl+Shift+D หรือ ?debug=1) ==================== -->
+  <div id="debug-config-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm p-4 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="debug-modal-title">
+    <div class="theme-card w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden">
+      <div class="px-5 py-3.5 bg-amber-800 text-white flex items-center justify-between">
+        <h2 id="debug-modal-title" class="font-bold text-sm sm:text-base flex items-center gap-2">
+          <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+          <span>ตรวจสอบฟิลด์ที่ยัง "รอข้อมูล" ใน SITE_CONFIG (checkConfig)</span>
+        </h2>
+        <button type="button" id="debug-modal-close" aria-label="ปิดหน้าต่างตรวจสอบ Config" class="w-8 h-8 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="p-4 sm:p-5 overflow-y-auto space-y-3 text-xs sm:text-sm">
+        <p id="debug-summary-text" class="font-medium text-[#4b5e53] dark:text-[#9cb5a5]"></p>
+        <div class="overflow-x-auto border border-[#E7DFC8] dark:border-[#2a4535] rounded-xl">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#F4EFE0] dark:bg-[#1b2f24] border-b border-[#E7DFC8] dark:border-[#2a4535]">
+                <th class="py-2 px-3">ลำดับ</th>
+                <th class="py-2 px-3">ตำแหน่งคีย์ (Key Path)</th>
+                <th class="py-2 px-3">ค่าปัจจุบันใน SITE_CONFIG</th>
+                <th class="py-2 px-3">สถานะ</th>
+              </tr>
+            </thead>
+            <tbody id="debug-table-body" class="divide-y divide-[#E7DFC8] dark:divide-[#2a4535]"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== สคริปต์หลัก (SITE_CONFIG อยู่บนสุด) ==================== -->
+  <script>
+const SITE_CONFIG = {
+  // ===== 1) ข้อมูลนักศึกษา =====
+  studentId: "2681052742451",          // รหัสนักศึกษา
+  studentName: "ธณพงศ์ งามฤทธิ์",       // ชื่อ-นามสกุล
+
+  // ===== 2) ข้อมูลชุมชน =====
+  communityNameTH: "วิสาหกิจชุมชนร้อยพันมะพร้าว",
+  communityNameEN: "Roi Phan Maprao Community Enterprise",
+  communityGroupLabel: "วิสาหกิจชุมชนร้อยพันมะพร้าว", // ข้อความในกล่องตัวตนที่ 3 (กลุ่มชุมชน/OTOP)
+  webName: "451-thanapong",           // ชื่อเว็บ = 3 หลักท้ายรหัส นศ. + ชื่ออังกฤษ (ตรวจสะกดก่อนส่ง)
+  // ===== โลโก้ (ลิงก์ตรงของรูป ถ้าไม่ใส่จะใช้ไอคอน 🥥 แทน) =====
+  logoUrl: "https://pkncoco.com/wp-content/uploads/2026/10/ร้อยพันมะพร้าว.png",
+  logoUrlDark: "",   // (ไม่บังคับ) โลโก้เวอร์ชันสำหรับ Dark Mode ถ้าว่างจะใช้ logoUrl
+  // ===== 3) ข้อมูลติดต่อ (ตรวจกับ pkncoco.com/contact แล้ว) =====
+  phone: "095 479 6311",               // เบอร์หลัก ใช้แสดงและโทรออก
+  phoneAlt: "095 256 1340",            // เบอร์สำรอง
+  email: "100pancoco@gmail.com",
+  address: "123/1 หมู่ 6 ตำบลปากแพรก อำเภอบางสะพานน้อย จังหวัดประจวบคีรีขันธ์ 77170",
+  googleMapsUrl: " https://maps.app.goo.gl/yow5quDgdsFE8iLq8",
+
+  // ===== 4) E-Book และ 360° =====
+  ebookUrl: "https://heyzine.com/flip-book/c8edeebfce.html",              // ปุ่ม E-catalog ทุกจุดไปที่นี่
+  ebookEmbedUrl: "",                                       // (ไม่บังคับ) ลิงก์ฝังจาก Heyzine เพื่ออ่านในหน้าเว็บ
+  drive360Url: " https://drive.google.com/drive/folders/1mZc6CiVXKpi0LcKGVtMwE5oN0aji-2PX", // ปุ่ม 360 องศาทุกจุดไปที่นี่
+
+  // ===== 5) ลิงก์ 5 ช่องทาง (Facebook เป็นช่องติดต่อเพิ่มเติม ไม่นับเป็น 1 ใน 5) =====
+  links: {
+  website: "https://pkncoco.com/shop",
+  oncyber: "https://oncyber.io/spaces/g7iXF5SY4lbBaZlE5muj",
+  youtube: "https://www.youtube.com/@nuengroipan.coconut",
+  tiktok: "https://www.tiktok.com/@nuengroipan.cocon",
+  instagram: "https://www.instagram.com/roipan.coconut/",
+  facebook: "https://www.facebook.com/100pancoco/"
+},
+
+  // ===== 6) สถิติจริง (ผู้ใช้ตรวจเองจากช่องจริง ใส่ null ถ้ายังไม่มีข้อมูล) =====
+  dataAsOf: " 16 ต.ค. 2569",
+  stats: {
+    youtubeClips: 47,                  // ตรวจให้ตรงช่องจริง
+    youtubeSubs: 15,                 // ผู้ติดตาม YouTube (ตัวเลข)
+    youtubeViews: 3379,                // ยอดวิวรวม (ถ้ามี)
+    youtubeHandle: "@nuengroipan.coconut",
+    tiktokClips: 13,
+    tiktokLikes: 38,
+    tiktokFollowers: 4,
+    igPosts: 28,
+    igFollowers: 10,
+    oncyberSpaces: 1                   // จำนวนพื้นที่ 3D ใน Oncyber (ตรวจให้ตรงจริง)
+  },
+
+  // ===== 7) รายละเอียด 5 ช่องทาง (ใช้ในตาราง การ์ดแท็บ 1 และกล่อง Channel) =====
+  // function = ฟังก์ชัน/สรรพคุณหลักของช่องนั้น ต้องเป็นข้อมูลจริงเท่านั้น
+  channels: [
+    { id: "website",   name: "Website E-Commerce",     icon: "fa-solid fa-globe",         badge: "Online",      color: "green",  linkKey: "website",
+      function: "ร้านค้าออนไลน์จำหน่ายผลิตภัณฑ์แปรรูปจากมะพร้าว: น้ำมันมะพร้าวสกัดเย็น สบู่ สบู่เหลว ยาสีฟัน ครีมทามือ เจลบำรุงผิวกาย และน้ำมันบำรุงผม" },
+    { id: "oncyber",   name: "3D Metaverse (Oncyber)", icon: "fa-solid fa-vr-cardboard",  badge: "Live Space",  color: "sky",    linkKey: "oncyber",
+      function: "[อธิบายจริงว่าพื้นที่ 3D นี้แสดงอะไร]" },
+    { id: "tiktok",    name: "TikTok Short Video",     icon: "fa-brands fa-tiktok",       badge: "Verified",    color: "purple", linkKey: "tiktok",
+      function: "[อธิบายจริงว่าคลิปสั้นนำเสนออะไร]" },
+    { id: "instagram", name: "Instagram Brand",        icon: "fa-brands fa-instagram",    badge: "Active Feed", color: "pink",   linkKey: "instagram",
+      function: "[อธิบายจริงว่าโพสต์นำเสนออะไร]" },
+    { id: "youtube",   name: "YouTube Storytelling",   icon: "fa-brands fa-youtube",      badge: "Streaming",   color: "red",    linkKey: "youtube",
+      function: "[อธิบายจริงว่าคลิปเล่าเรื่องอะไร]" }
+  ],
+
+  // ===== 8) สินค้าจริง 10 รายการ (ตรวจกับ https://pkncoco.com/shop แล้ว) =====
+  products: [
+    { name: "ครีมทามือ (Hand Cream Coconut)", price: 95, size: "",
+      benefit: "ผลิตภัณฑ์บำรุงมือด้วยสารสกัดจากมะพร้าว ช่วยเติมความชุ่มชื้นล้ำลึกและสมานผิวที่แตกแห้งหรือลอกเป็นขุยให้กลับมาเนียนนุ่ม ซึมซาบไว กลิ่นหอมผ่อนคลาย",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/22130f9d-8536-4a1e-aac1-f8df8b1de2d1-1-300x300.jpg" },
+    { name: "น้ำมันบำรุงผม (Coconut Oil)", price: 150, size: "60 ml",
+      benefit: "น้ำมันมะพร้าวบำรุงเส้นผมล้ำลึกจากรากจรดปลาย ช่วยเติมความชุ่มชื้นให้ผมแห้งเสีย ลดการสูญเสียโปรตีนและปัญหาผมชี้ฟูแตกปลาย ให้ผมนุ่มลื่นเงางามไม่เหนียวเหนอะหนะ",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/65b6ef79-3bff-402e-982f-5e751245e05c-300x300.jpg" },
+    { name: "น้ำมันมะพร้าวธรรมชาติ สกัดเย็น 100%", price: 180, size: "250 ml",
+      benefit: "ผลิตจากมะพร้าวท้องถิ่น อ.บางสะพานน้อย วิสาหกิจชุมชนมาตรฐาน GAP และอินทรีย์ ใช้รับประทาน บำรุงผิวและเส้นผม",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/2cae5cb6-66c3-4f8c-85ac-56e5f190f674-300x300.jpg" },
+    { name: "ยาสีฟันธรรมชาติ (Natural Toothpaste)", price: 120, size: "",
+      benefit: "ยาสีฟันสูตรธรรมชาติผสมน้ำมันมะพร้าวสกัดเย็น กานพลู และใบฝรั่ง ปราศจากสารก่อฟอง (SLS) และสีสังเคราะห์ ช่วยลดแบคทีเรีย คราบพลัค และดูแลเหงือกอย่างอ่อนโยน",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/12dcfd15-24b9-403b-8bbb-f0c2debedfaf-300x300.jpg" },
+    { name: "ยาสีฟันสมุนไพร (Natural Toothpaste)", price: 120, size: "",
+      benefit: "ยาสีฟันผสมน้ำมันมะพร้าวสกัดเย็นผสานสมุนไพรกานพลู ใบฝรั่ง และเกลือบริสุทธิ์ ปราศจากสาร SLS ช่วยดูแลช่องปากแบบอ่อนโยน ลดคราบพลัคและลดกลิ่นปาก",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/5988b86a-6eaf-44e5-aa3e-3f8eb1778d29-300x300.jpg" },
+    { name: "สบู่น้ำมันมะพร้าว (Coconut Oil Soap)", price: 80, size: "",
+      benefit: "สบู่ทำความสะอาดผิวจากน้ำมันมะพร้าวธรรมชาติ มีกรดลอริกช่วยขจัดคราบมันและสิ่งสกปรกได้ล้ำลึก ลดการสะสมของแบคทีเรีย ฟองเยอะเนื้อละเอียด ล้างออกง่าย",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/d36bacf8-df88-45a8-947c-92e67265f758-300x300.jpg" },
+    { name: "สบู่น้ำมันมะพร้าว (Coconut Oil Soap) อีกสูตร", price: 80, size: "",
+      benefit: "สบู่น้ำมันมะพร้าวบริสุทธิ์ เนื้อฟองหนานุ่มละเอียดช่วยทำความสะอาดสิ่งสกปรกและคราบมันอย่างหมดจดโดยไม่เสียความชุ่มชื้น เนื้อสบู่แข็งตัวพอเหมาะละลายช้า",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/ec39a999-aab8-498b-8518-c313ed1b5048-300x300.jpg" },
+    { name: "สบู่น้ำมันมะพร้าว \"นมข้าว\" (Rice Milk Coconut Oil Soap)", price: 80, size: "100 กรัม",
+      benefit: "สบู่น้ำมันมะพร้าวผสมนมข้าวสูตรเน้นความชุ่มชื้น เหมาะกับผิวบอบบางและผิวแห้ง ทำความสะอาดล้ำลึกพร้อมบำรุงผิวให้นุ่มนวลแลดูกระจ่างใส ไม่ทำให้ผิวแห้งตึง",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/8df62cb8-6f16-4d49-9443-c4e3da61d75f-300x300.jpg" },
+    { name: "สบู่เหลวน้ำมันมะพร้าว (Coconut Oil Liquid Soap)", price: 250, size: "240 ml",
+      benefit: "สบู่เหลวน้ำมันมะพร้าวทำความสะอาดผิวอย่างหมดจดโดยไม่ทำให้ผิวแห้งตึง ฟองนุ่มล้างออกง่าย คงความชุ่มชื้นตามธรรมชาติและลดการสะสมของแบคทีเรีย อ่อนโยนต่อผิวแพ้ง่าย",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/07c04d94-5e8f-443f-9ca1-17e732e07e8a-300x300.jpg" },
+    { name: "เจลบำรุงผิวกาย (Body Gel)", price: 200, size: "240 ml",
+      benefit: "ผลิตภัณฑ์เนื้อเจลเบาสบายผิว ซึมซาบเร็ว ไม่เหนียวเหนอะหนะ เหมาะกับสภาพอากาศร้อน ช่วยเติมความชุ่มชื้นและปลอบประโลมผิวหลังออกแดด ใช้ได้กับทุกสภาพผิว",
+      image: "https://pkncoco.com/wp-content/uploads/2026/04/cbef68fe-d50b-43f5-a8d0-58538b37fe7f-300x300.jpg" }
+  ],
+
+  // ===== 9) 360° / สถานที่ท่องเที่ยวและศูนย์เรียนรู้ของชุมชน (ผู้ใช้กรอกข้อมูลจริง) =====
+  // viewUrl = ลิงก์เปิดดู (Drive/YouTube/Oncyber) | driveFileId = ID ไฟล์ Drive ถ้าจะฝังเล่นในหน้า | embedUrl = ลิงก์ iframe อื่นๆ
+  attractions: [
+  { id: "oncyber", title: "นิทรรศการร้านค้าเสมือนจริง 3D Metaverse (Oncyber)",
+    detail: "เดินชมร้านค้าเสมือนจริงของร้อยพันมะพร้าวแบบ 3 มิติ",
+    viewUrl: "https://oncyber.io/spaces/g7iXF5SY4lbBaZlE5muj", embedUrl: "", driveFileId: "" },
+  { id: "farm", title: "วิสาหกิจชุมชนกลุ่มร้อยพันมะพร้าวไทย",
+    detail: "คำอธิบายจริงของสวน/ศูนย์เรียนรู้",
+    viewUrl: "https://drive.google.com/drive/folders/1mZc6CiVXKpi0LcKGVtMwE5oN0aji-2PX", embedUrl: "", driveFileId: "" },
+  { id: "productset", title: "มุมมองผลิตภัณฑ์เด่น 360° (ชุดเซ็ตของฝาก)",
+    detail: "คำอธิบายจริงของชุดเซ็ต",
+    viewUrl: "https://drive.google.com/drive/folders/1mZc6CiVXKpi0LcKGVtMwE5oN0aji-2PX", embedUrl: "", driveFileId: "" }
+]
+};
+
+// ============================================================================
+// ฟังก์ชันกลาง (Core Helper Functions)
+// ============================================================================
+
+/**
+ * ตรวจสอบว่าค่าเป็น placeholder หรือยังไม่มีข้อมูลหรือไม่
+ * คืนค่า true เมื่อ v เป็น null, undefined, "" หรือสตริงที่ขึ้นต้นด้วย "[" (หลัง trim)
+ */
+function isPlaceholder(v) {
+  if (v === null || v === undefined) return true;
+  if (typeof v === "number") return Number.isNaN(v);
+  const str = String(v).trim();
+  return str === "" || str.startsWith("[");
+}
+
+/**
+ * คืนค่าสำหรับแสดงผล หากยังไม่มีข้อมูลคืนค่า fallback (ค่าเริ่มต้น "รอข้อมูล")
+ */
+function show(v, fallback = "รอข้อมูล") {
+  return isPlaceholder(v) ? fallback : String(v).trim();
+}
+
+function el(tag, cls, text, attrs) {
+  const node = document.createElement(tag);
+  if (cls) node.className = cls;
+  if (text !== undefined && text !== null) node.textContent = String(text);
+  if (attrs) Object.keys(attrs).forEach(k => node.setAttribute(k, attrs[k]));
+  return node;
+}
+
+function createValueOrPlaceholderNode(v, fallback = "รอข้อมูล") {
+  if (isPlaceholder(v)) {
+    const badge = el("span", "placeholder-badge");
+    badge.appendChild(el("i", "fa-regular fa-hourglass-half", null, { "aria-hidden": "true" }));
+    badge.appendChild(el("span", "", fallback));
+    return badge;
+  }
+  return el("span", "", String(v).trim());
+}
+
+function fmtNum(n) {
+  if (isPlaceholder(n)) return "รอข้อมูล";
+  const num = Number(n);
+  return Number.isNaN(num) ? "รอข้อมูล" : num.toLocaleString("th-TH");
+}
+
+function toast(msg) {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+  const item = el("div", "pointer-events-auto px-4 py-2.5 rounded-xl bg-[#1f2a24] dark:bg-emerald-950 text-white border border-emerald-500/40 shadow-xl text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-200");
+  item.appendChild(el("i", "fa-solid fa-circle-info text-amber-400 shrink-0", null, { "aria-hidden": "true" }));
+  item.appendChild(el("span", "", msg));
+  container.appendChild(item);
+  setTimeout(() => {
+    item.style.opacity = "0";
+    item.style.transform = "translateY(8px)";
+    setTimeout(() => { if (item.parentNode) item.parentNode.removeChild(item); }, 220);
+  }, 3000);
+}
+
+function openExternal(url, label) {
+  const cleanLabel = label || "รายการนี้";
+  if (!isPlaceholder(url)) {
+    window.open(String(url).trim(), "_blank", "noopener,noreferrer");
+  } else {
+    toast("ยังไม่ได้ใส่ลิงก์ " + cleanLabel + " ใน SITE_CONFIG");
+  }
+}
+
+function computed() {
+  const products = Array.isArray(SITE_CONFIG.products) ? SITE_CONFIG.products : [];
+  const productCount = products.length;
+  const validPrices = products.map(p => Number(p.price)).filter(p => !Number.isNaN(p) && p > 0);
+  const minPrice = validPrices.length ? Math.min(...validPrices) : 0;
+  const maxPrice = validPrices.length ? Math.max(...validPrices) : 0;
+  const priceRange = validPrices.length ? `฿${fmtNum(minPrice)} - ฿${fmtNum(maxPrice)}` : "รอข้อมูล";
+
+  const s = SITE_CONFIG.stats || {};
+  const contentParts = [s.youtubeClips, productCount, s.igPosts, s.tiktokClips, s.oncyberSpaces];
+  const hasMissingContentStats = contentParts.some(v => isPlaceholder(v));
+  const totalContent = contentParts.reduce((acc, v) => acc + (isPlaceholder(v) ? 0 : Number(v) || 0), 0);
+
+  const channels = Array.isArray(SITE_CONFIG.channels) ? SITE_CONFIG.channels : [];
+  const activeChannelCount = channels.filter(ch => !isPlaceholder(SITE_CONFIG.links ? SITE_CONFIG.links[ch.linkKey] : "")).length;
+  const readiness = Math.round((activeChannelCount / 5) * 100);
+
+  return { productCount, minPrice, maxPrice, priceRange, totalContent, hasMissingContentStats, activeChannelCount, readiness };
+}
+
+function checkConfig(openModal = false) {
+  const missing = [];
+  function scanObj(obj, prefix) {
+    if (!obj || typeof obj !== "object") return;
+    Object.keys(obj).forEach(k => {
+      const val = obj[k];
+      const path = prefix ? (Array.isArray(obj) ? `${prefix}[${k}]` : `${prefix}.${k}`) : k;
+      if (val !== null && typeof val === "object") {
+        scanObj(val, path);
+      } else if (isPlaceholder(val)) {
+        missing.push({ path, currentValue: val === "" ? '"" (ว่าง)' : String(val), status: "รอข้อมูล" });
+      }
+    });
+  }
+  scanObj(SITE_CONFIG, "");
+
+  console.group("🔍 ผลการตรวจสอบ SITE_CONFIG (checkConfig)");
+  console.log(`พบฟิลด์ที่ยังรอข้อมูลทั้งหมด: ${missing.length} รายการ`);
+  console.table(missing);
+  console.groupEnd();
+
+  const tbody = document.getElementById("debug-table-body");
+  const summary = document.getElementById("debug-summary-text");
+  if (tbody && summary) {
+    summary.textContent = `พบฟิลด์ที่ยังเป็น "รอข้อมูล" (Placeholder หรือค่าว่าง) จำนวน ${missing.length} รายการ:`;
+    tbody.textContent = "";
+    missing.forEach((item, idx) => {
+      const tr = el("tr");
+      tr.appendChild(el("td", "py-2 px-3 font-mono text-xs", String(idx + 1)));
+      tr.appendChild(el("td", "py-2 px-3 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-400", item.path));
+      tr.appendChild(el("td", "py-2 px-3 font-mono text-xs text-amber-800 dark:text-amber-300 break-all", item.currentValue));
+      const tdStatus = el("td", "py-2 px-3");
+      tdStatus.appendChild(createValueOrPlaceholderNode(null, item.status));
+      tr.appendChild(tdStatus);
+      tbody.appendChild(tr);
+    });
+  }
+  if (openModal) {
+    const modal = document.getElementById("debug-config-modal");
+    if (modal) modal.classList.remove("hidden");
+  }
+  return missing;
+}
+window.checkConfig = checkConfig;
+
+let currentTheme = "light";
+function getStoredTheme() {
+  try { return window.localStorage.getItem("roipan_theme"); } catch (err) { return null; }
+}
+function setStoredTheme(mode) {
+  try { window.localStorage.setItem("roipan_theme", mode); } catch (err) {}
+}
+function applyTheme(mode) {
+  currentTheme = mode === "dark" ? "dark" : "light";
+  document.documentElement.classList.toggle("dark", currentTheme === "dark");
+  const btn = document.getElementById("theme-toggle-btn");
+  const icon = document.getElementById("theme-toggle-icon");
+  if (btn && icon) {
+    const isDark = currentTheme === "dark";
+    btn.setAttribute("aria-pressed", String(isDark));
+    icon.className = isDark ? "fa-solid fa-sun text-base text-amber-300" : "fa-solid fa-moon text-base text-amber-800";
+  }
+  renderNavbarLogo();
+  updateChartsTheme();
+}
+function initTheme() {
+  const saved = getStoredTheme();
+  if (saved === "dark" || saved === "light") {
+    applyTheme(saved);
+  } else {
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(prefersDark ? "dark" : "light");
+  }
+}
+
+function getChannelStatsNodes(channelId) {
+  const s = SITE_CONFIG.stats || {};
+  const c = computed();
+  const frag = document.createDocumentFragment();
+  const addPart = (label, val, isRawText = false) => {
+    const wrap = el("span", "inline-flex items-center gap-1");
+    if (label) wrap.appendChild(el("span", "", label + " "));
+    if (isPlaceholder(val)) {
+      wrap.appendChild(createValueOrPlaceholderNode(null, "รอข้อมูล"));
+    } else {
+      wrap.appendChild(el("strong", "font-semibold", isRawText ? String(val).trim() : fmtNum(val)));
+    }
+    return wrap;
+  };
+  const addSep = () => el("span", "mx-1.5 opacity-50", "|");
+
+  if (channelId === "youtube") {
+    frag.appendChild(addPart("ผู้ติดตาม", s.youtubeSubs));
+    frag.appendChild(addSep());
+    frag.appendChild(addPart("ยอดวิว", s.youtubeViews));
+    frag.appendChild(addSep());
+    frag.appendChild(addPart("", s.youtubeHandle, true));
+  } else if (channelId === "tiktok") {
+    frag.appendChild(addPart("ผู้ติดตาม", s.tiktokFollowers));
+    frag.appendChild(addSep());
+    frag.appendChild(addPart("ยอดไลก์", s.tiktokLikes));
+  } else if (channelId === "instagram") {
+    frag.appendChild(addPart("ผู้ติดตาม", s.igFollowers));
+  } else if (channelId === "website") {
+    frag.appendChild(el("span", "", `สินค้าพร้อมขาย ${fmtNum(c.productCount)} รายการ ราคา ${c.priceRange}`));
+  } else if (channelId === "oncyber") {
+    frag.appendChild(isPlaceholder(s.oncyberSpaces) ? createValueOrPlaceholderNode(null, "รอข้อมูล") : el("span", "", `${fmtNum(s.oncyberSpaces)} พื้นที่ 3D`));
+  }
+  return frag;
+}
+
+function getChannelMediaText(channelId) {
+  const s = SITE_CONFIG.stats || {};
+  const c = computed();
+  if (channelId === "website") return isPlaceholder(c.productCount) ? null : `${fmtNum(c.productCount)} สินค้า`;
+  if (channelId === "oncyber") return isPlaceholder(s.oncyberSpaces) ? null : `${fmtNum(s.oncyberSpaces)} พื้นที่ 3D`;
+  if (channelId === "tiktok") return isPlaceholder(s.tiktokClips) ? null : `${fmtNum(s.tiktokClips)} คลิปสั้น`;
+  if (channelId === "instagram") return isPlaceholder(s.igPosts) ? null : `${fmtNum(s.igPosts)} โพสต์`;
+  if (channelId === "youtube") return isPlaceholder(s.youtubeClips) ? null : `${fmtNum(s.youtubeClips)} คลิป`;
+  return null;
+}
+
+function getChannelBadgeClasses(color, isLinkValid) {
+  if (!isLinkValid) return "bg-slate-500/20 text-slate-400 border border-slate-500/40 cursor-not-allowed";
+  const map = {
+    green: "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/40",
+    sky: "bg-sky-500/20 text-sky-700 dark:text-sky-300 border border-sky-500/40",
+    purple: "bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/40",
+    pink: "bg-pink-500/20 text-pink-700 dark:text-pink-300 border border-pink-500/40",
+    red: "bg-red-500/20 text-red-700 dark:text-red-300 border border-red-500/40"
+  };
+  return map[color] || map.green;
+}
+
+function renderNavbarLogo() {
+  const wrap = document.getElementById("nav-logo-wrap");
+  if (!wrap) return;
+  wrap.textContent = "";
+  const chosenLogo = (currentTheme === "dark" && !isPlaceholder(SITE_CONFIG.logoUrlDark)) ? SITE_CONFIG.logoUrlDark : SITE_CONFIG.logoUrl;
+  if (!isPlaceholder(chosenLogo)) {
+    const img = el("img", "w-full h-full object-cover", null, {
+      src: String(chosenLogo).trim(),
+      alt: "โลโก้ " + show(SITE_CONFIG.communityNameTH),
+      width: "40",
+      height: "40",
+      loading: "lazy"
+    });
+    img.onerror = () => { wrap.textContent = "🥥"; };
+    wrap.appendChild(img);
+  } else {
+    wrap.appendChild(el("span", "", "🥥", { "aria-hidden": "true" }));
+  }
+}
+
+function handle360Shortcut() {
+  if (!isPlaceholder(SITE_CONFIG.drive360Url)) {
+    openExternal(SITE_CONFIG.drive360Url, "360 องศา");
+  } else {
+    openTab(4, true);
+    openExternal(SITE_CONFIG.drive360Url, "360 องศา");
+  }
+}
+
+function handleEcatalogShortcut() {
+  if (!isPlaceholder(SITE_CONFIG.ebookUrl)) {
+    openExternal(SITE_CONFIG.ebookUrl, "E-catalog");
+  } else {
+    openTab(3, true);
+    openExternal(SITE_CONFIG.ebookUrl, "E-catalog");
+  }
+}
+
+function decorateShortcutButtonState(btn, url) {
+  if (!btn) return;
+  if (isPlaceholder(url)) {
+    btn.setAttribute("aria-disabled", "true");
+    btn.classList.add("opacity-75", "cursor-not-allowed");
+  } else {
+    btn.removeAttribute("aria-disabled");
+    btn.classList.remove("opacity-75", "cursor-not-allowed");
+  }
+}
+
+function renderNavbar() {
+  document.title = `${show(SITE_CONFIG.communityNameTH)} | ${show(SITE_CONFIG.webName)}`;
+  const nameEl = document.getElementById("nav-community-name");
+  const webEl = document.getElementById("nav-web-name");
+  if (nameEl) nameEl.textContent = show(SITE_CONFIG.communityNameTH);
+  if (webEl) webEl.textContent = `รหัสเว็บ: ${show(SITE_CONFIG.webName)}`;
+  renderNavbarLogo();
+
+  const oncyberUrl = SITE_CONFIG.links ? SITE_CONFIG.links.oncyber : "";
+  ["nav-btn-oncyber", "nav-btn-oncyber-m"].forEach(id => {
+    const btn = document.getElementById(id);
+    decorateShortcutButtonState(btn, oncyberUrl);
+    if (btn) btn.onclick = () => openExternal(SITE_CONFIG.links.oncyber, "Oncyber");
+  });
+  ["nav-btn-360", "nav-btn-360-m"].forEach(id => {
+    const btn = document.getElementById(id);
+    decorateShortcutButtonState(btn, SITE_CONFIG.drive360Url);
+    if (btn) btn.onclick = handle360Shortcut;
+  });
+  ["nav-btn-ecatalog", "nav-btn-ecatalog-m"].forEach(id => {
+    const btn = document.getElementById(id);
+    decorateShortcutButtonState(btn, SITE_CONFIG.ebookUrl);
+    if (btn) btn.onclick = handleEcatalogShortcut;
+  });
+  ["nav-btn-chatbot", "nav-btn-chatbot-m"].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.onclick = () => toggleChatbot(true);
+  });
+}
+
+function renderHero() {
+  const c = computed();
+  const titleTh = document.getElementById("hero-title-th");
+  const titleEn = document.getElementById("hero-title-en");
+  const desc = document.getElementById("hero-description");
+
+  if (titleTh) titleTh.textContent = show(SITE_CONFIG.communityNameTH);
+  if (titleEn) titleEn.textContent = show(SITE_CONFIG.communityNameEN);
+  if (desc) {
+    const websiteChannel = (SITE_CONFIG.channels || []).find(ch => ch.id === "website");
+    const fnText = websiteChannel && !isPlaceholder(websiteChannel.function) ? websiteChannel.function : "";
+    desc.textContent = `${fnText} ตั้งอยู่ที่ ${show(SITE_CONFIG.address)} มีผลิตภัณฑ์พร้อมจำหน่าย ${fmtNum(c.productCount)} รายการ ช่วงราคา ${c.priceRange}`;
+  }
+
+  [["identity-student-id", SITE_CONFIG.studentId], ["identity-student-name", SITE_CONFIG.studentName], ["identity-group-label", SITE_CONFIG.communityGroupLabel]].forEach(([id, val]) => {
+    const node = document.getElementById(id);
+    if (node) { node.textContent = ""; node.appendChild(createValueOrPlaceholderNode(val)); }
+  });
+
+  const monitorTitle = document.getElementById("hero-monitor-title");
+  if (monitorTitle) monitorTitle.textContent = `Channel สื่อสาร: ${c.readiness}% Active`;
+
+  const listEl = document.getElementById("hero-channels-list");
+  if (listEl) {
+    listEl.textContent = "";
+    const heroBadgeColors = {
+      green: "bg-emerald-500/25 text-emerald-300 border-emerald-400/40",
+      sky: "bg-sky-500/25 text-sky-300 border-sky-400/40",
+      purple: "bg-purple-500/25 text-purple-300 border-purple-400/40",
+      pink: "bg-pink-500/25 text-pink-300 border-pink-400/40",
+      red: "bg-red-500/25 text-red-300 border-red-400/40"
+    };
+    (SITE_CONFIG.channels || []).forEach(ch => {
+      const url = SITE_CONFIG.links ? SITE_CONFIG.links[ch.linkKey] : "";
+      const valid = !isPlaceholder(url);
+      const row = el("button", `w-full flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition ${valid ? "cursor-pointer" : "opacity-75 cursor-not-allowed"}`, null, { type: "button" });
+      if (!valid) row.setAttribute("aria-disabled", "true");
+      row.onclick = () => openExternal(SITE_CONFIG.links[ch.linkKey], ch.name);
+
+      const left = el("div", "flex items-center gap-2.5 min-w-0");
+      left.appendChild(el("i", `${ch.icon} text-base text-emerald-400 w-5 text-center shrink-0`, null, { "aria-hidden": "true" }));
+      left.appendChild(el("span", "text-xs sm:text-sm font-medium text-slate-100 truncate", ch.name));
+
+      const badge = valid
+        ? el("span", `px-2.5 py-0.5 rounded-full text-[11px] font-semibold border shrink-0 ${heroBadgeColors[ch.color] || heroBadgeColors.green}`, ch.badge)
+        : el("span", "px-2.5 py-0.5 rounded-full text-[11px] font-semibold border bg-slate-600/30 text-slate-300 border-slate-500/40 shrink-0", "รอลิงก์");
+
+      row.appendChild(left);
+      row.appendChild(badge);
+      listEl.appendChild(row);
+    });
+  }
+
+  const heroEbookBtn = document.getElementById("hero-btn-ecatalog");
+  if (heroEbookBtn) {
+    decorateShortcutButtonState(heroEbookBtn, SITE_CONFIG.ebookUrl);
+    heroEbookBtn.onclick = handleEcatalogShortcut;
+  }
+}
+
+function renderVerifiedTable() {
+  const bannerText = document.getElementById("verified-banner-text");
+  if (bannerText) {
+    bannerText.textContent = `สถิติจริงจากระบบ 100% (Verified Real Data): ดึงข้อมูลโดยตรงจาก 5 แพลตฟอร์มจริงของ นศ.${show(SITE_CONFIG.studentName)} ${show(SITE_CONFIG.communityNameTH)}`;
+  }
+
+  const tbody = document.getElementById("verified-table-body");
+  if (tbody) {
+    tbody.textContent = "";
+    (SITE_CONFIG.channels || []).forEach(ch => {
+      const tr = el("tr", "hover:bg-emerald-500/5 transition-colors");
+
+      const tdCh = el("td", "py-3.5 px-4 font-semibold align-top", null, { "data-label": "ช่องทาง (Channel)" });
+      const chWrap = el("div", "flex items-center gap-2.5");
+      chWrap.appendChild(el("i", `${ch.icon} text-base text-emerald-700 dark:text-emerald-400 w-5 text-center shrink-0`, null, { "aria-hidden": "true" }));
+      chWrap.appendChild(el("span", "", ch.name));
+      tdCh.appendChild(chWrap);
+
+      const tdUrl = el("td", "py-3.5 px-4 align-top max-w-[220px]", null, { "data-label": "URL (คลิกได้จริง)" });
+      const rawUrl = SITE_CONFIG.links ? SITE_CONFIG.links[ch.linkKey] : "";
+      if (isPlaceholder(rawUrl)) {
+        const btn = el("button", "cursor-not-allowed opacity-80 inline-flex items-center gap-1", null, { type: "button", "aria-disabled": "true" });
+        btn.onclick = () => openExternal(SITE_CONFIG.links[ch.linkKey], ch.name);
+        btn.appendChild(createValueOrPlaceholderNode(null, "รอข้อมูล"));
+        tdUrl.appendChild(btn);
+      } else {
+        const a = el("a", "inline-flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 hover:underline font-medium max-w-full", null, {
+          href: String(rawUrl).trim(), target: "_blank", rel: "noopener noreferrer"
+        });
+        a.appendChild(el("span", "truncate max-w-[180px] inline-block align-bottom", String(rawUrl).trim()));
+        a.appendChild(el("i", "fa-solid fa-arrow-up-right-from-square text-[11px] shrink-0", null, { "aria-hidden": "true" }));
+        tdUrl.appendChild(a);
+      }
+
+      const tdStats = el("td", "py-3.5 px-4 align-top leading-relaxed", null, { "data-label": "สถิติจริง (Verified Stats)" });
+      tdStats.appendChild(getChannelStatsNodes(ch.id));
+
+      const tdMedia = el("td", "py-3.5 px-4 align-top font-semibold", null, { "data-label": "สื่อในระบบ (Media in System)" });
+      tdMedia.appendChild(createValueOrPlaceholderNode(getChannelMediaText(ch.id)));
+
+      const tdFn = el("td", "py-3.5 px-4 align-top space-y-2", null, { "data-label": "ฟังก์ชัน / สรรพคุณหลัก" });
+      const fnDiv = el("div");
+      fnDiv.appendChild(createValueOrPlaceholderNode(ch.function));
+      tdFn.appendChild(fnDiv);
+
+      if (ch.id === "website" && Array.isArray(SITE_CONFIG.products)) {
+        const details = el("details", "mt-2 rounded-xl bg-[#FBF6E9] dark:bg-[#1b2f24] p-2.5 border border-[#E7DFC8] dark:border-[#2a4535]");
+        details.appendChild(el("summary", "cursor-pointer font-semibold text-xs text-emerald-800 dark:text-emerald-300 select-none", `ดูรายการสินค้าและสรรพคุณจริงทั้ง ${fmtNum(SITE_CONFIG.products.length)} รายการ`));
+        const ul = el("ul", "mt-2 space-y-1.5 text-xs list-disc list-inside text-[#4b5e53] dark:text-[#9cb5a5]");
+        SITE_CONFIG.products.forEach(p => {
+          if (!isPlaceholder(p.benefit)) {
+            const li = el("li");
+            li.appendChild(el("strong", "text-[#1f2a24] dark:text-[#e8f3ec]", `${p.name} (฿${fmtNum(p.price)}${p.size ? " / " + p.size : ""}): `));
+            li.appendChild(el("span", "", p.benefit));
+            ul.appendChild(li);
+          }
+        });
+        details.appendChild(ul);
+        tdFn.appendChild(details);
+      }
+
+      tr.appendChild(tdCh);
+      tr.appendChild(tdUrl);
+      tr.appendChild(tdStats);
+      tr.appendChild(tdMedia);
+      tr.appendChild(tdFn);
+      tbody.appendChild(tr);
+    });
+  }
+
+  const asOfEl = document.getElementById("table-data-as-of");
+  if (asOfEl) {
+    asOfEl.textContent = "";
+    asOfEl.appendChild(el("span", "", "ข้อมูล ณ วันที่ "));
+    asOfEl.appendChild(createValueOrPlaceholderNode(SITE_CONFIG.dataAsOf));
+  }
+}
+
+function renderStats6Cards() {
+  const grid = document.getElementById("stats-6-grid");
+  if (!grid) return;
+  grid.textContent = "";
+  const c = computed();
+  const s = SITE_CONFIG.stats || {};
+
+  const cards = [
+    {
+      icon: "fa-solid fa-layer-group", color: "text-emerald-700 dark:text-emerald-400", title: "คอนเทนต์รวมจริง", value: c.totalContent, suffix: " ชิ้นงาน",
+      subNode: () => {
+        const wrap = el("div", "text-xs text-[#4b5e53] dark:text-[#9cb5a5]", "ยอดรวมชิ้นงานทุกช่องทาง");
+        if (c.hasMissingContentStats) wrap.appendChild(el("div", "text-[11px] text-amber-700 dark:text-amber-400 mt-0.5", "*ยังไม่รวมช่องที่รอข้อมูล"));
+        return wrap;
+      }
+    },
+    {
+      icon: "fa-brands fa-youtube", color: "text-red-600 dark:text-red-400", title: "YouTube", value: s.youtubeClips, suffix: " คลิป",
+      subNode: () => {
+        const wrap = el("div", "text-xs text-[#4b5e53] dark:text-[#9cb5a5] space-y-0.5");
+        wrap.appendChild(el("div", "", `ผู้ติดตาม ${fmtNum(s.youtubeSubs)} คน`));
+        const line2 = el("div");
+        line2.appendChild(createValueOrPlaceholderNode(s.youtubeHandle));
+        wrap.appendChild(line2);
+        return wrap;
+      }
+    },
+    {
+      icon: "fa-brands fa-tiktok", color: "text-purple-600 dark:text-purple-400", title: "TikTok", value: s.tiktokClips, suffix: " คลิปสั้น",
+      subNode: () => el("div", "text-xs text-[#4b5e53] dark:text-[#9cb5a5]", `ยอดไลก์ ${fmtNum(s.tiktokLikes)} | ผู้ติดตาม ${fmtNum(s.tiktokFollowers)}`)
+    },
+    {
+      icon: "fa-brands fa-instagram", color: "text-pink-600 dark:text-pink-400", title: "Instagram", value: s.igPosts, suffix: " โพสต์",
+      subNode: () => el("div", "text-xs text-[#4b5e53] dark:text-[#9cb5a5]", `ผู้ติดตาม ${fmtNum(s.igFollowers)} คน`)
+    },
+    {
+      icon: "fa-solid fa-store", color: "text-amber-700 dark:text-amber-400", title: "สินค้าบนเว็บ", value: c.productCount, suffix: " รายการ",
+      subNode: () => el("div", "text-xs text-[#4b5e53] dark:text-[#9cb5a5]", `พร้อมขาย (${c.priceRange})`)
+    },
+    {
+      icon: "fa-solid fa-signal", color: "text-emerald-600 dark:text-emerald-400", title: "ความพร้อม 5 ช่องทาง", value: c.readiness, suffix: "%", isHighlightGreen: true,
+      subNode: () => el("div", "text-xs text-[#4b5e53] dark:text-[#9cb5a5]", "ดัชนี Active เชื่อมโยงครบทุกจุด")
+    }
+  ];
+
+  cards.forEach(card => {
+    const cardEl = el("div", "theme-card theme-card-hover p-4 flex flex-col justify-between gap-2");
+    const top = el("div", "flex items-center justify-between gap-2");
+    top.appendChild(el("span", "text-xs font-semibold text-[#4b5e53] dark:text-[#9cb5a5]", card.title));
+    top.appendChild(el("i", `${card.icon} text-lg ${card.color}`, null, { "aria-hidden": "true" }));
+
+    const mid = el("div", `text-xl sm:text-2xl font-bold ${card.isHighlightGreen ? "text-emerald-700 dark:text-emerald-400" : "text-[#1f2a24] dark:text-[#e8f3ec]"}`);
+    if (isPlaceholder(card.value)) {
+      mid.appendChild(createValueOrPlaceholderNode(null, "รอข้อมูล"));
+    } else {
+      mid.appendChild(el("span", "count-up-num", fmtNum(card.value), { "data-target": String(Number(card.value)) }));
+      mid.appendChild(el("span", "text-xs sm:text-sm font-semibold ml-0.5", card.suffix || ""));
+    }
+    cardEl.appendChild(top);
+    cardEl.appendChild(mid);
+    cardEl.appendChild(card.subNode());
+    grid.appendChild(cardEl);
+  });
+  runCountUpAnimations();
+}
+
+function runCountUpAnimations() {
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const nums = document.querySelectorAll(".count-up-num");
+  nums.forEach(el => {
+    const target = Number(el.getAttribute("data-target"));
+    if (Number.isNaN(target)) return;
+    if (prefersReduced) {
+      el.textContent = fmtNum(target);
+      return;
+    }
+    const duration = 650;
+    const startTime = performance.now();
+    function step(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * eased);
+      el.textContent = fmtNum(current);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = fmtNum(target);
+      }
+    }
+    requestAnimationFrame(step);
+  });
+}
+
+// ============================================================================
+// เรนเดอร์ส่วนที่ 5: ระบบ 4 แท็บเจาะลึก
+// ============================================================================
+let activeTabNumber = 1;
+let doughnutChartInstance = null;
+let barChartInstance = null;
+
+function openTab(n, scrollIntoViewFlag = false) {
+  const tabNum = Number(n);
+  if (tabNum < 1 || tabNum > 4) return;
+  activeTabNumber = tabNum;
+
+  for (let i = 1; i <= 4; i++) {
+    const btn = document.getElementById(`tab-btn-${i}`);
+    const panel = document.getElementById(`tab-panel-${i}`);
+    const isSelected = i === tabNum;
+    if (btn) {
+      btn.setAttribute("aria-selected", String(isSelected));
+      btn.setAttribute("tabindex", isSelected ? "0" : "-1");
+      if (isSelected) {
+        btn.className = "tab-trigger flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold bg-emerald-700 dark:bg-emerald-600 text-white shadow transition";
+      } else {
+        btn.className = "tab-trigger flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold text-[#4b5e53] dark:text-[#9cb5a5] hover:text-[#1f2a24] dark:hover:text-white transition";
+      }
+    }
+    if (panel) {
+      if (isSelected) {
+        panel.classList.remove("hidden");
+      } else {
+        panel.classList.add("hidden");
+      }
+    }
+  }
+
+  if (tabNum === 2) {
+    initOrUpdateAnalyticsCharts();
+  }
+
+  if (scrollIntoViewFlag) {
+    const section = document.getElementById("deep-dive-tabs-section");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+}
+window.openTab = openTab;
+
+// แท็บ 1: การ์ด 5 ช่องทาง + QR Code
+function renderTab1Channels() {
+  const grid = document.getElementById("tab1-channels-grid");
+  if (!grid) return;
+  grid.textContent = "";
+
+  (SITE_CONFIG.channels || []).forEach(ch => {
+    const rawUrl = SITE_CONFIG.links ? SITE_CONFIG.links[ch.linkKey] : "";
+    const validUrl = !isPlaceholder(rawUrl);
+
+    const card = el("div", "theme-card theme-card-hover p-5 flex flex-col justify-between gap-4");
+    const topSection = el("div", "space-y-3");
+
+    const header = el("div", "flex items-center justify-between gap-2");
+    const titleWrap = el("div", "flex items-center gap-2.5 min-w-0");
+    const iconBox = el("div", "w-10 h-10 rounded-xl bg-emerald-600/10 dark:bg-emerald-400/15 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-lg shrink-0");
+    iconBox.appendChild(el("i", ch.icon, null, { "aria-hidden": "true" }));
+    titleWrap.appendChild(iconBox);
+    titleWrap.appendChild(el("h3", "font-bold text-sm sm:text-base truncate", ch.name));
+
+    const badge = el("span", `px-2.5 py-0.5 rounded-full text-xs font-semibold shrink-0 ${getChannelBadgeClasses(ch.color, validUrl)}`, validUrl ? ch.badge : "รอลิงก์");
+    header.appendChild(titleWrap);
+    header.appendChild(badge);
+
+    const statsBox = el("div", "p-3 rounded-xl bg-[#FBF6E9] dark:bg-[#1b2f24] border border-[#E7DFC8] dark:border-[#2a4535] text-xs space-y-1");
+    statsBox.appendChild(el("div", "font-semibold text-[#047857] dark:text-[#34d399]", `สื่อในระบบ: ${show(getChannelMediaText(ch.id))}`));
+    const verRow = el("div", "text-[#4b5e53] dark:text-[#9cb5a5]");
+    verRow.appendChild(getChannelStatsNodes(ch.id));
+    statsBox.appendChild(verRow);
+
+    const fnBox = el("div", "text-xs sm:text-sm text-[#1f2a24] dark:text-[#e8f3ec]");
+    fnBox.appendChild(el("span", "font-semibold text-[#6B4423] dark:text-amber-300 mr-1", "ฟังก์ชันหลัก:"));
+    fnBox.appendChild(createValueOrPlaceholderNode(ch.function));
+
+    topSection.appendChild(header);
+    topSection.appendChild(statsBox);
+    topSection.appendChild(fnBox);
+
+    const bottomSection = el("div", "pt-3 border-t border-[#E7DFC8] dark:border-[#2a4535] flex flex-col items-center gap-3");
+    if (validUrl) {
+      const qrWrap = el("div", "flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white border border-[#E7DFC8] w-full");
+      const qrImg = el("img", "w-28 h-28 object-contain rounded", null, {
+        src: "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(String(rawUrl).trim()),
+        alt: "QR Code สำหรับเข้าชม " + ch.name,
+        width: "120",
+        height: "120",
+        loading: "lazy"
+      });
+      qrImg.onerror = () => {
+        const fallback = el("div", "w-28 h-28 flex items-center justify-center text-center text-xs text-slate-600 bg-slate-100 rounded p-2", "🥥 ไม่สามารถโหลดรูป QR Code ได้ กดปุ่มด้านล่างเพื่อเข้าชม");
+        qrWrap.replaceChild(fallback, qrImg);
+      };
+      qrWrap.appendChild(qrImg);
+      qrWrap.appendChild(el("span", "text-[11px] font-medium text-slate-600", "สแกนเพื่อเข้าชม"));
+      bottomSection.appendChild(qrWrap);
+    } else {
+      const qrPlaceholder = el("div", "w-full py-6 px-3 rounded-xl border border-dashed border-slate-400/50 bg-slate-500/5 flex flex-col items-center justify-center gap-1.5 text-center text-xs text-[#4b5e53] dark:text-[#9cb5a5]");
+      qrPlaceholder.appendChild(el("i", "fa-solid fa-qrcode text-xl opacity-50", null, { "aria-hidden": "true" }));
+      qrPlaceholder.appendChild(el("span", "", "รอลิงก์ จะสร้าง QR ให้อัตโนมัติ"));
+      bottomSection.appendChild(qrPlaceholder);
+    }
+
+    const openBtn = el("button", validUrl
+      ? "w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white flex items-center justify-center gap-2 transition"
+      : "w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm bg-slate-400/20 text-slate-500 dark:text-slate-400 border border-slate-400/30 cursor-not-allowed flex items-center justify-center gap-2",
+      null, { type: "button" });
+    if (!validUrl) openBtn.setAttribute("aria-disabled", "true");
+    openBtn.onclick = () => openExternal(SITE_CONFIG.links[ch.linkKey], ch.name);
+    openBtn.appendChild(el("i", "fa-solid fa-arrow-up-right-from-square", null, { "aria-hidden": "true" }));
+    openBtn.appendChild(el("span", "", validUrl ? "เปิดช่องทางนี้" : "รอลิงก์ช่องทางนี้"));
+
+    bottomSection.appendChild(openBtn);
+    card.appendChild(topSection);
+    card.appendChild(bottomSection);
+    grid.appendChild(card);
+  });
+}
+
+// แท็บ 2: Analytics Dashboard (Chart.js 2 กราฟ)
+function initOrUpdateAnalyticsCharts() {
+  if (typeof Chart === "undefined") return;
+  const isDark = currentTheme === "dark";
+  const textColor = isDark ? "#e8f3ec" : "#1f2a24";
+  const gridColor = isDark ? "rgba(232, 243, 236, 0.12)" : "rgba(31, 42, 36, 0.1)";
+
+  const s = SITE_CONFIG.stats || {};
+  const c = computed();
+
+  const rawContentItems = [
+    { label: "YouTube (คลิป)", val: s.youtubeClips, color: "#ef4444" },
+    { label: "Website (สินค้า)", val: c.productCount, color: "#10b981" },
+    { label: "Instagram (โพสต์)", val: s.igPosts, color: "#ec4899" },
+    { label: "TikTok (คลิปสั้น)", val: s.tiktokClips, color: "#a855f7" },
+    { label: "Oncyber (พื้นที่ 3D)", val: s.oncyberSpaces, color: "#0ea5e9" }
+  ];
+  const validContentItems = rawContentItems.filter(item => !isPlaceholder(item.val));
+  const skippedContentItems = rawContentItems.filter(item => isPlaceholder(item.val));
+
+  const doughnutSummary = document.getElementById("doughnut-chart-summary");
+  if (doughnutSummary) {
+    doughnutSummary.textContent = `ยอดรวมชิ้นงานทั้งหมด: ${fmtNum(c.totalContent)} ชิ้นงาน` +
+      (skippedContentItems.length ? ` (รอข้อมูล: ${skippedContentItems.map(i => i.label).join(", ")})` : " (ครบทั้ง 5 ช่องทาง)");
+  }
+
+  const doughnutCanvas = document.getElementById("contentDoughnutChart");
+  if (doughnutCanvas && validContentItems.length > 0) {
+    if (doughnutChartInstance) doughnutChartInstance.destroy();
+    doughnutChartInstance = new Chart(doughnutCanvas, {
+      type: "doughnut",
+      data: {
+        labels: validContentItems.map(i => i.label),
+        datasets: [{
+          data: validContentItems.map(i => Number(i.val)),
+          backgroundColor: validContentItems.map(i => i.color),
+          borderColor: isDark ? "#14231b" : "#FFFDF7",
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: { color: textColor, font: { family: "'Prompt', sans-serif", size: 12 } }
+          }
+        }
+      }
+    });
+    doughnutChartInstance.resize();
+  }
+
+  const rawEngagementItems = [
+    { label: "ผู้ติดตาม YouTube", val: s.youtubeSubs, color: "#f87171" },
+    { label: "ผู้ติดตาม TikTok", val: s.tiktokFollowers, color: "#c084fc" },
+    { label: "ผู้ติดตาม IG", val: s.igFollowers, color: "#f472b6" },
+    { label: "ยอดไลก์ TikTok", val: s.tiktokLikes, color: "#8b5cf6" },
+    { label: "ยอดวิว YouTube", val: s.youtubeViews, color: "#ef4444" }
+  ];
+  const validEngItems = rawEngagementItems.filter(item => !isPlaceholder(item.val));
+  const skippedEngItems = rawEngagementItems.filter(item => isPlaceholder(item.val));
+
+  const barSummary = document.getElementById("bar-chart-summary");
+  if (barSummary) {
+    barSummary.textContent = skippedEngItems.length
+      ? `รายการที่ยังไม่มีข้อมูล (รอข้อมูล): ${skippedEngItems.map(i => i.label).join(", ")}`
+      : "แสดงข้อมูลจริงครบทุกรายการจาก SITE_CONFIG.stats";
+  }
+
+  const barCanvas = document.getElementById("engagementBarChart");
+  if (barCanvas) {
+    if (barChartInstance) barChartInstance.destroy();
+    if (validEngItems.length > 0) {
+      barChartInstance = new Chart(barCanvas, {
+        type: "bar",
+        data: {
+          labels: validEngItems.map(i => i.label),
+          datasets: [{
+            label: "สถิติจริง (รายการ/ครั้ง)",
+            data: validEngItems.map(i => Number(i.val)),
+            backgroundColor: validEngItems.map(i => i.color),
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { ticks: { color: textColor, font: { family: "'Prompt', sans-serif", size: 11 } }, grid: { color: gridColor } },
+            y: { beginAtZero: true, ticks: { color: textColor, font: { family: "'Prompt', sans-serif", size: 11 } }, grid: { color: gridColor } }
+          },
+          plugins: {
+            legend: { labels: { color: textColor, font: { family: "'Prompt', sans-serif", size: 12 } } }
+          }
+        }
+      });
+      barChartInstance.resize();
+    }
+  }
+}
+
+function updateChartsTheme() {
+  if (activeTabNumber === 2) initOrUpdateAnalyticsCharts();
+}
+
+// แท็บ 3: E-catalog / 3D Flipbook
+let currentSpreadIndex = 0;
+
+function createFlipbookProductPageNode(product, pageNum) {
+  const wrap = el("div", "h-full flex flex-col justify-between gap-2");
+  if (!product) {
+    const empty = el("div", "m-auto text-center text-xs text-[#4b5e53]");
+    empty.appendChild(createValueOrPlaceholderNode(null, "รอข้อมูล"));
+    wrap.appendChild(empty);
+    return wrap;
+  }
+
+  const top = el("div", "space-y-2");
+  const imgBox = el("div", "w-full h-36 sm:h-48 rounded-xl overflow-hidden bg-[#FBF6E9] dark:bg-[#1b2f24] border border-[#E7DFC8] dark:border-[#2a4535] flex items-center justify-center");
+  const img = el("img", "w-full h-full object-contain p-1", null, {
+    src: product.image, alt: product.name, width: "300", height: "300", loading: "lazy"
+  });
+  img.onerror = () => {
+    imgBox.replaceChild(el("div", "w-full h-full flex flex-col items-center justify-center text-2xl bg-emerald-500/10", "🥥"), img);
+  };
+  imgBox.appendChild(img);
+
+  const titleRow = el("div", "flex items-start justify-between gap-1.5");
+  titleRow.appendChild(el("h4", "font-bold text-xs sm:text-base text-[#1f2a24] dark:text-[#e8f3ec] leading-snug", product.name));
+
+  const metaRow = el("div", "flex flex-wrap items-center gap-2");
+  metaRow.appendChild(el("span", "px-2.5 py-0.5 rounded-lg bg-emerald-700 text-white font-bold text-xs sm:text-sm", `฿${fmtNum(product.price)}`));
+  if (!isPlaceholder(product.size)) {
+    metaRow.appendChild(el("span", "px-2 py-0.5 rounded-lg bg-amber-900/10 dark:bg-amber-400/15 text-[#92400e] dark:text-amber-300 text-xs font-medium", `ขนาด ${product.size}`));
+  }
+
+  const benefitP = el("p", "text-[11px] sm:text-xs text-[#4b5e53] dark:text-[#9cb5a5] leading-relaxed line-clamp-4", isPlaceholder(product.benefit) ? "ดูรายละเอียดที่หน้าสินค้า" : product.benefit);
+
+  top.appendChild(imgBox);
+  top.appendChild(titleRow);
+  top.appendChild(metaRow);
+  top.appendChild(benefitP);
+
+  const footer = el("div", "pt-2 border-t border-[#E7DFC8] dark:border-[#2a4535] flex items-center justify-between text-[11px] text-[#4b5e53] dark:text-[#9cb5a5]");
+  footer.appendChild(el("span", "", `หน้า ${pageNum}`));
+  const buyBtn = el("button", "text-emerald-700 dark:text-emerald-400 font-semibold hover:underline", "สั่งซื้อ ↗", { type: "button" });
+  buyBtn.onclick = () => openExternal(SITE_CONFIG.links.website, product.name);
+  footer.appendChild(buyBtn);
+
+  wrap.appendChild(top);
+  wrap.appendChild(footer);
+  return wrap;
+}
+
+function renderFlipbookSpread(direction = null) {
+  const products = Array.isArray(SITE_CONFIG.products) ? SITE_CONFIG.products : [];
+  const totalSpreads = Math.max(1, Math.ceil(products.length / 2));
+  if (currentSpreadIndex < 0) currentSpreadIndex = 0;
+  if (currentSpreadIndex >= totalSpreads) currentSpreadIndex = totalSpreads - 1;
+
+  const book = document.getElementById("flipbook-book");
+  const leftPage = document.getElementById("flip-page-left");
+  const rightPage = document.getElementById("flip-page-right");
+  const indicator = document.getElementById("flip-spread-indicator");
+  const prevBtn = document.getElementById("flip-prev-btn");
+  const nextBtn = document.getElementById("flip-next-btn");
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const leftIdx = currentSpreadIndex * 2;
+  const rightIdx = leftIdx + 1;
+  if (indicator) indicator.textContent = `คู่ที่ ${currentSpreadIndex + 1} / ${totalSpreads}`;
+  if (prevBtn) prevBtn.disabled = currentSpreadIndex === 0;
+  if (nextBtn) nextBtn.disabled = currentSpreadIndex >= totalSpreads - 1;
+
+  function updatePages() {
+    if (leftPage) { leftPage.textContent = ""; leftPage.appendChild(createFlipbookProductPageNode(products[leftIdx], leftIdx + 1)); }
+    if (rightPage) { rightPage.textContent = ""; rightPage.appendChild(createFlipbookProductPageNode(products[rightIdx], rightIdx + 1)); }
+  }
+
+  updatePages();
+  if (book && direction && !prefersReduced) {
+    const animClass = direction === "next" ? "turning-next" : "turning-prev";
+    book.classList.add(animClass);
+    setTimeout(() => { book.classList.remove(animClass); }, 220);
+  }
+}
+
+function initTab3Ecatalog() {
+  const embedContainer = document.getElementById("ebook-embed-container");
+  const embedIframe = document.getElementById("ebook-embed-iframe");
+  if (embedContainer && embedIframe) {
+    if (!isPlaceholder(SITE_CONFIG.ebookEmbedUrl)) {
+      embedContainer.classList.remove("hidden");
+      embedIframe.src = String(SITE_CONFIG.ebookEmbedUrl).trim();
+    } else {
+      embedContainer.classList.add("hidden");
+    }
+  }
+
+  const prevBtn = document.getElementById("flip-prev-btn");
+  const nextBtn = document.getElementById("flip-next-btn");
+  if (prevBtn) {
+    prevBtn.onclick = () => {
+      if (currentSpreadIndex > 0) { currentSpreadIndex--; renderFlipbookSpread("prev"); }
+    };
+  }
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      const totalSpreads = Math.ceil((SITE_CONFIG.products || []).length / 2);
+      if (currentSpreadIndex < totalSpreads - 1) { currentSpreadIndex++; renderFlipbookSpread("next"); }
+    };
+  }
+
+  const openEbookBtn = document.getElementById("tab3-open-ebook-btn");
+  const openEbookLabel = document.getElementById("tab3-open-ebook-label");
+  if (openEbookBtn && openEbookLabel) {
+    if (isPlaceholder(SITE_CONFIG.ebookUrl)) {
+      openEbookBtn.setAttribute("aria-disabled", "true");
+      openEbookBtn.className = "w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-slate-400/25 text-slate-600 dark:text-slate-300 border border-slate-400/40 cursor-not-allowed flex items-center justify-center gap-2";
+      openEbookLabel.textContent = "รอลิงก์ E-Book (เปิดอ่าน E-Book ตัวเต็ม)";
+    } else {
+      openEbookBtn.removeAttribute("aria-disabled");
+      openEbookBtn.className = "w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white shadow-md flex items-center justify-center gap-2 transition";
+      openEbookLabel.textContent = "เปิดอ่าน E-Book ตัวเต็ม";
+    }
+    openEbookBtn.onclick = () => openExternal(SITE_CONFIG.ebookUrl, "E-Book");
+  }
+
+  const orderBtn = document.getElementById("tab3-order-website-btn");
+  if (orderBtn) orderBtn.onclick = () => openExternal(SITE_CONFIG.links.website, "Website สั่งซื้อสินค้า");
+
+  renderFlipbookSpread();
+}
+
+// แท็บ 4: สถานที่ท่องเที่ยว 360° และสินค้าแนะนำ
+let selectedProductCategory = "all";
+
+function getProductCategory(name) {
+  const n = String(name);
+  if (n.includes("สบู่")) return "สบู่";
+  if (n.includes("ยาสีฟัน")) return "ยาสีฟัน";
+  if (n.includes("น้ำมัน")) return "น้ำมันมะพร้าว/บำรุงผม";
+  return "ครีมและเจลบำรุงผิว";
+}
+
+function renderTab4AttractionsAndProducts() {
+  const driveBtn = document.getElementById("tab4-drive360-btn");
+  if (driveBtn) {
+    decorateShortcutButtonState(driveBtn, SITE_CONFIG.drive360Url);
+    driveBtn.onclick = () => openExternal(SITE_CONFIG.drive360Url, "Google Drive 360°");
+  }
+
+  const attrGrid = document.getElementById("tab4-attractions-grid");
+  if (attrGrid) {
+    attrGrid.textContent = "";
+    (SITE_CONFIG.attractions || []).forEach(attr => {
+      const card = el("div", "theme-card theme-card-hover p-5 flex flex-col justify-between gap-4");
+      const resolvedUrl = (attr.id === "oncyber" && isPlaceholder(attr.viewUrl))
+        ? (SITE_CONFIG.links ? SITE_CONFIG.links.oncyber : "")
+        : attr.viewUrl;
+      const validViewUrl = !isPlaceholder(resolvedUrl);
+
+      const top = el("div", "space-y-3");
+      const frameWrap = el("div", "aspect-video w-full rounded-xl overflow-hidden border border-[#E7DFC8] dark:border-[#2a4535] bg-[#13221a] relative flex items-center justify-center");
+
+      if (!isPlaceholder(attr.driveFileId)) {
+        frameWrap.appendChild(el("iframe", "w-full h-full", null, {
+          src: `https://drive.google.com/file/d/${String(attr.driveFileId).trim()}/preview`,
+          allow: "autoplay; fullscreen", loading: "lazy", title: show(attr.title)
+        }));
+      } else if (!isPlaceholder(attr.embedUrl)) {
+        frameWrap.appendChild(el("iframe", "w-full h-full", null, {
+          src: String(attr.embedUrl).trim(), loading: "lazy", title: show(attr.title)
+        }));
+      } else {
+        const simBtn = el("button", `w-full h-full flex flex-col items-center justify-center gap-2 p-4 text-center text-white bg-gradient-to-br from-emerald-900/90 via-[#13221a] to-amber-950/80 hover:from-emerald-800/90 transition ${validViewUrl ? "cursor-pointer" : "cursor-not-allowed opacity-85"}`, null, { type: "button" });
+        if (!validViewUrl) simBtn.setAttribute("aria-disabled", "true");
+        simBtn.onclick = () => openExternal(resolvedUrl, show(attr.title, attr.id));
+
+        const iconCircle = el("div", "w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-2xl text-emerald-300");
+        iconCircle.appendChild(el("i", attr.id === "oncyber" ? "fa-solid fa-vr-cardboard" : "fa-solid fa-street-view", null, { "aria-hidden": "true" }));
+        simBtn.appendChild(iconCircle);
+        simBtn.appendChild(el("span", "text-xs sm:text-sm font-semibold text-emerald-200", "คลิกเพื่อเปิดมุมมอง 360°"));
+        simBtn.appendChild(el("span", "text-[11px] text-slate-300", validViewUrl ? "เปิดในแท็บใหม่" : "รอลิงก์ใน SITE_CONFIG"));
+        frameWrap.appendChild(simBtn);
+      }
+
+      const titleDiv = el("h4", "font-bold text-sm sm:text-base text-[#1f2a24] dark:text-[#e8f3ec]");
+      titleDiv.appendChild(createValueOrPlaceholderNode(attr.title));
+
+      const detailDiv = el("div", "text-xs sm:text-sm text-[#4b5e53] dark:text-[#9cb5a5]");
+      detailDiv.appendChild(el("span", "font-medium mr-1", "รายละเอียด:"));
+      detailDiv.appendChild(createValueOrPlaceholderNode(attr.detail));
+
+      top.appendChild(frameWrap);
+      top.appendChild(titleDiv);
+      top.appendChild(detailDiv);
+
+      const actionBtn = el("button", validViewUrl
+        ? "w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm bg-emerald-700 hover:bg-emerald-800 text-white flex items-center justify-center gap-2 transition"
+        : "w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm bg-slate-400/20 text-slate-500 dark:text-slate-400 border border-slate-400/30 cursor-not-allowed flex items-center justify-center gap-2",
+        null, { type: "button" });
+      if (!validViewUrl) actionBtn.setAttribute("aria-disabled", "true");
+      actionBtn.onclick = () => openExternal(resolvedUrl, show(attr.title, attr.id));
+      actionBtn.appendChild(el("i", "fa-solid fa-compass", null, { "aria-hidden": "true" }));
+      actionBtn.appendChild(el("span", "", "เปิดมุมมอง 360°"));
+
+      card.appendChild(top);
+      card.appendChild(actionBtn);
+      attrGrid.appendChild(card);
+    });
+  }
+
+  const countSpan = document.getElementById("tab4-product-count");
+  if (countSpan) countSpan.textContent = fmtNum(computed().productCount);
+
+  renderProductCategoryFilters();
+  renderTab4ProductsGrid();
+}
+
+function renderProductCategoryFilters() {
+  const bar = document.getElementById("product-filter-bar");
+  if (!bar) return;
+  bar.textContent = "";
+  ["all", "น้ำมันมะพร้าว/บำรุงผม", "สบู่", "ยาสีฟัน", "ครีมและเจลบำรุงผิว"].forEach(cat => {
+    const active = selectedProductCategory === cat;
+    const btn = el("button", active
+      ? "px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-700 text-white shadow-sm"
+      : "px-3 py-1.5 rounded-xl text-xs font-medium bg-[#F4EFE0] dark:bg-[#1b2f24] text-[#4b5e53] dark:text-[#9cb5a5] hover:text-[#1f2a24] dark:hover:text-white border border-[#E7DFC8] dark:border-[#2a4535]",
+      cat === "all" ? `ทั้งหมด (${fmtNum((SITE_CONFIG.products || []).length)})` : cat,
+      { type: "button" });
+    btn.onclick = () => {
+      selectedProductCategory = cat;
+      renderProductCategoryFilters();
+      renderTab4ProductsGrid();
+    };
+    bar.appendChild(btn);
+  });
+}
+
+function renderTab4ProductsGrid() {
+  const grid = document.getElementById("tab4-products-grid");
+  if (!grid) return;
+  grid.textContent = "";
+
+  const products = (SITE_CONFIG.products || []).filter(p => selectedProductCategory === "all" || getProductCategory(p.name) === selectedProductCategory);
+  products.forEach(p => {
+    const card = el("div", "theme-card theme-card-hover p-3.5 flex flex-col justify-between gap-3");
+    const top = el("div", "space-y-2.5");
+
+    const imgWrap = el("div", "aspect-square w-full rounded-xl overflow-hidden bg-[#FBF6E9] dark:bg-[#1b2f24] border border-[#E7DFC8] dark:border-[#2a4535] flex items-center justify-center");
+    const img = el("img", "w-full h-full object-cover", null, { src: p.image, alt: p.name, width: "300", height: "300", loading: "lazy" });
+    img.onerror = () => { imgWrap.replaceChild(el("div", "w-full h-full flex items-center justify-center text-3xl bg-emerald-500/10", "🥥"), img); };
+    imgWrap.appendChild(img);
+
+    const priceRow = el("div", "flex items-center justify-between gap-1");
+    priceRow.appendChild(el("span", "font-bold text-sm sm:text-base text-emerald-700 dark:text-emerald-400", `฿${fmtNum(p.price)}`));
+    if (!isPlaceholder(p.size)) {
+      priceRow.appendChild(el("span", "text-[11px] px-2 py-0.5 rounded-md bg-amber-900/10 dark:bg-amber-400/15 text-[#92400e] dark:text-amber-300 font-medium", p.size));
+    }
+
+    top.appendChild(imgWrap);
+    top.appendChild(el("h4", "font-bold text-xs sm:text-sm text-[#1f2a24] dark:text-[#e8f3ec] leading-snug", p.name));
+    top.appendChild(priceRow);
+    top.appendChild(el("p", "text-[11px] text-[#4b5e53] dark:text-[#9cb5a5] leading-relaxed line-clamp-3", isPlaceholder(p.benefit) ? "ดูรายละเอียดที่หน้าสินค้า" : p.benefit));
+
+    const buyBtn = el("button", "w-full py-2 px-3 rounded-xl font-semibold text-xs bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white flex items-center justify-center gap-1.5 transition", null, { type: "button" });
+    buyBtn.onclick = () => openExternal(SITE_CONFIG.links.website, p.name);
+    buyBtn.appendChild(el("i", "fa-solid fa-cart-shopping", null, { "aria-hidden": "true" }));
+    buyBtn.appendChild(el("span", "", "สั่งซื้อที่เว็บไซต์"));
+
+    card.appendChild(top);
+    card.appendChild(buyBtn);
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================================
+// เรนเดอร์ Footer
+// ============================================================================
+function renderFooter() {
+  const nameEl = document.getElementById("footer-community-name");
+  const enEl = document.getElementById("footer-community-en");
+  const addrEl = document.getElementById("footer-address");
+  const phonesEl = document.getElementById("footer-phones");
+  const emailEl = document.getElementById("footer-email");
+  const fbBtn = document.getElementById("footer-fb-btn");
+  const creditEl = document.getElementById("footer-student-credit");
+  const webLbl = document.getElementById("footer-web-label");
+  const copyName = document.getElementById("footer-copy-name");
+
+  if (nameEl) nameEl.textContent = show(SITE_CONFIG.communityNameTH);
+  if (enEl) enEl.textContent = show(SITE_CONFIG.communityNameEN);
+  if (addrEl) addrEl.textContent = `ที่อยู่: ${show(SITE_CONFIG.address)}`;
+
+  if (phonesEl) {
+    phonesEl.textContent = "";
+    const p1 = String(SITE_CONFIG.phone || "").replace(/\s+/g, "");
+    phonesEl.appendChild(el("a", "block hover:underline", `📞 โทร: ${show(SITE_CONFIG.phone)}`, { href: `tel:${p1}`, target: "_blank", rel: "noopener noreferrer" }));
+    if (!isPlaceholder(SITE_CONFIG.phoneAlt)) {
+      const p2 = String(SITE_CONFIG.phoneAlt).replace(/\s+/g, "");
+      phonesEl.appendChild(el("a", "block hover:underline text-[#4b5e53] dark:text-[#9cb5a5]", `📞 เบอร์สำรอง: ${show(SITE_CONFIG.phoneAlt)}`, { href: `tel:${p2}`, target: "_blank", rel: "noopener noreferrer" }));
+    }
+  }
+
+  if (emailEl) {
+    emailEl.textContent = "";
+    emailEl.appendChild(el("a", "hover:underline", `✉️ อีเมล: ${show(SITE_CONFIG.email)}`, { href: `mailto:${show(SITE_CONFIG.email, "")}`, target: "_blank", rel: "noopener noreferrer" }));
+  }
+
+  if (fbBtn) fbBtn.onclick = () => openExternal(SITE_CONFIG.links.facebook, "Facebook");
+  if (creditEl) creditEl.textContent = `จัดทำโดย นศ.${show(SITE_CONFIG.studentName)} รหัส ${show(SITE_CONFIG.studentId)}`;
+  if (webLbl) webLbl.textContent = `ชื่อเว็บไซต์: ${show(SITE_CONFIG.webName)}`;
+  if (copyName) copyName.textContent = show(SITE_CONFIG.communityNameTH);
+}
+
+// ============================================================================
+// ส่วนที่ 6: ระบบผู้ช่วย AI Chatbot (Strict Bot Logic 100%)
+// ============================================================================
+const BOT_REFUSAL_TEXT = "ขออภัยค่ะ 🙏 บอทร้อยพันมะพร้าวได้รับคำสั่งให้ตอบเฉพาะข้อมูลสินค้า ราคา และสถานที่ท่องเที่ยวจากเว็บไซต์วิสาหกิจชุมชนร้อยพันมะพร้าวเท่านั้นค่ะ สนใจสอบถามเรื่องสินค้ามะพร้าวหรือกดปุ่มเมนูด้านล่างได้เลยนะคะ 🥥";
+
+const QUICK_QUESTIONS = [
+  "🥥 สินค้าแนะนำและราคา",
+  "🌴 สถานที่ท่องเที่ยวชุมชน",
+  "🛒 สั่งซื้อสินค้าออนไลน์",
+  "📍 ที่อยู่ เบอร์โทร & แผนที่"
+];
+
+function getBotReply(text) {
+  const cleaned = String(text || "").trim().replace(/\s+/g, " ").toLowerCase();
+  if (!cleaned) {
+    return { type: "refusal", text: BOT_REFUSAL_TEXT, matchedProducts: [], showQuickButtons: true };
+  }
+
+  const vetoKeywords = [
+    "หวย", "ลอตเตอรี่", "การเมือง", "นายก", "เลือกตั้ง",
+    "หุ้น", "คริปโต", "บิตคอยน์", "ราคาทอง", "น้ำมันเบนซิน", "น้ำมันดีเซล",
+    "พยากรณ์", "อากาศ", "ฝนตก", "การบ้าน", "ข้อสอบ", "แปลภาษา",
+    "เขียนโค้ด", "python", "ฟุตบอล", "ชนะบอล", "ผลบอล", "แทงบอล", "ดารา",
+    "สูตรแกง", "แกงกะทิ", "ลืมคำสั่ง", "ignore previous", "system prompt", "เล่าเรื่องตลก"
+  ];
+  for (const kw of vetoKeywords) {
+    if (cleaned.includes(kw)) {
+      return { type: "refusal", text: BOT_REFUSAL_TEXT, matchedProducts: [], showQuickButtons: true };
+    }
+  }
+
+  const products = Array.isArray(SITE_CONFIG.products) ? SITE_CONFIG.products : [];
+  const c = computed();
+
+  const productMatchers = [
+    { keys: ["สบู่เหลว", "liquid soap"], filter: p => p.name.includes("สบู่เหลว") },
+    { keys: ["นมข้าว", "rice milk"], filter: p => p.name.includes("นมข้าว") },
+    { keys: ["ยาสีฟันสมุนไพร"], filter: p => p.name.includes("ยาสีฟันสมุนไพร") },
+    { keys: ["ยาสีฟันธรรมชาติ"], filter: p => p.name.includes("ยาสีฟันธรรมชาติ") },
+    { keys: ["ยาสีฟัน", "toothpaste"], filter: p => p.name.includes("ยาสีฟัน") },
+    { keys: ["ครีมทามือ", "ทามือ", "hand cream"], filter: p => p.name.includes("ครีมทามือ") },
+    { keys: ["น้ำมันบำรุงผม", "บำรุงผม", "หมักผม"], filter: p => p.name.includes("น้ำมันบำรุงผม") },
+    { keys: ["สกัดเย็น", "น้ำมันมะพร้าวธรรมชาติ"], filter: p => p.name.includes("สกัดเย็น") },
+    { keys: ["เจลบำรุงผิว", "เจล", "body gel"], filter: p => p.name.includes("เจลบำรุงผิวกาย") },
+    { keys: ["สบู่น้ำมันมะพร้าว", "สบู่"], filter: p => p.name.includes("สบู่") }
+  ];
+
+  for (const matcher of productMatchers) {
+    if (matcher.keys.some(k => cleaned.includes(k))) {
+      const matched = products.filter(matcher.filter);
+      if (matched.length > 0) {
+        const summaryLines = matched.map(p => `${p.name}${p.size ? " (" + p.size + ")" : ""} ราคา ฿${fmtNum(p.price)} — ${show(p.benefit, "ดูรายละเอียดที่หน้าสินค้า")}`).join(" | ");
+        return {
+          type: "product",
+          text: `พบสินค้าของ${show(SITE_CONFIG.communityNameTH)}ที่ตรงกับคำถาม ${fmtNum(matched.length)} รายการค่ะ: ${summaryLines}`,
+          matchedProducts: matched,
+          showQuickButtons: false
+        };
+      }
+    }
+  }
+
+  const productIntentKeys = ["สินค้า", "ผลิตภัณฑ์", "ราคา", "กี่บาท", "ขายอะไร", "มีอะไรบ้าง", "แนะนำ", "รายการ", "สรรพคุณ", "ประโยชน์", "ใช้ทำอะไร"];
+  if (productIntentKeys.some(k => cleaned.includes(k))) {
+    return {
+      type: "all_products",
+      text: `${show(SITE_CONFIG.communityNameTH)} มีผลิตภัณฑ์แปรรูปจากมะพร้าวพร้อมจำหน่ายทั้งหมด ${fmtNum(c.productCount)} รายการ ช่วงราคา ${c.priceRange} ดังนี้ค่ะ:`,
+      matchedProducts: products,
+      showQuickButtons: false
+    };
+  }
+
+  const tourismIntentKeys = ["ท่องเที่ยว", "ที่เที่ยว", "เที่ยว", "สวน", "ฐานเรียนรู้", "ศูนย์เรียนรู้", "ชมสวน", "360", "oncyber"];
+  if (tourismIntentKeys.some(k => cleaned.includes(k))) {
+    const validAttrs = (SITE_CONFIG.attractions || []).filter(a => !isPlaceholder(a.title));
+    if (validAttrs.length > 0) {
+      const listTxt = validAttrs.map(a => `• ${show(a.title)}${!isPlaceholder(a.detail) ? ": " + show(a.detail) : ""}`).join("\n");
+      return {
+        type: "tourism",
+        text: `สถานที่ท่องเที่ยวและนิทรรศการเสมือนจริง 360° ของ${show(SITE_CONFIG.communityNameTH)} ได้แก่:\n${listTxt}\n(บางรายการกำลังอัปเดตรายละเอียดเพิ่มเติม สามารถกดดูที่แท็บ 4 ได้เลยค่ะ)`,
+        matchedProducts: [],
+        showQuickButtons: true,
+        actionType: "tab4"
+      };
+    }
+    return { type: "tourism", text: "ข้อมูลสถานที่ท่องเที่ยวของชุมชนกำลังอัปเดตค่ะ", matchedProducts: [], showQuickButtons: true, actionType: "tab4" };
+  }
+
+  const orderIntentKeys = ["สั่งซื้อ", "ซื้อ", "สั่ง", "ออเดอร์", "จัดส่ง", "ส่งของ", "ช่องทางซื้อ", "ซื้อที่ไหน"];
+  if (orderIntentKeys.some(k => cleaned.includes(k))) {
+    return {
+      type: "order",
+      text: `สามารถเลือกชมและสั่งซื้อผลิตภัณฑ์ของ${show(SITE_CONFIG.communityNameTH)} (${fmtNum(c.productCount)} รายการ ราคา ${c.priceRange}) ได้โดยตรงที่เว็บไซต์ร้านค้าออนไลน์ ${show(SITE_CONFIG.links.website)} หรือโทรสอบถามได้ที่เบอร์ ${show(SITE_CONFIG.phone)} (เบอร์สำรอง ${show(SITE_CONFIG.phoneAlt)}) ค่ะ`,
+      matchedProducts: [],
+      showQuickButtons: true,
+      actionType: "order"
+    };
+  }
+
+  const contactIntentKeys = ["ที่อยู่", "อยู่ที่ไหน", "อยู่ไหน", "เบอร์", "โทร", "ติดต่อ", "แผนที่", "map", "ที่ตั้ง", "เฟซบุ๊ก", "facebook", "อีเมล"];
+  if (contactIntentKeys.some(k => cleaned.includes(k))) {
+    return {
+      type: "contact",
+      text: `ข้อมูลติดต่อ${show(SITE_CONFIG.communityNameTH)}:\n📍 ที่อยู่: ${show(SITE_CONFIG.address)}\n📞 โทรศัพท์: ${show(SITE_CONFIG.phone)} (สำรอง: ${show(SITE_CONFIG.phoneAlt)})\n✉️ อีเมล: ${show(SITE_CONFIG.email)}\n🌐 Facebook: ${show(SITE_CONFIG.links.facebook)}\n🗺️ แผนที่ Google Maps: ${show(SITE_CONFIG.googleMapsUrl)}`,
+      matchedProducts: [],
+      showQuickButtons: true,
+      actionType: "contact"
+    };
+  }
+
+  const communityIntentKeys = ["ชุมชน", "วิสาหกิจ", "ร้อยพัน", "กลุ่ม", "เกี่ยวกับ"];
+  if (communityIntentKeys.some(k => cleaned.includes(k))) {
+    return {
+      type: "community",
+      text: `${show(SITE_CONFIG.communityNameTH)} (${show(SITE_CONFIG.communityNameEN)}) ตั้งอยู่ที่ ${show(SITE_CONFIG.address)} จำหน่ายผลิตภัณฑ์แปรรูปจากมะพร้าวรวม ${fmtNum(c.productCount)} รายการ ช่วงราคา ${c.priceRange} เชื่อมโยงการตลาดดิจิทัล 5 ช่องทางค่ะ`,
+      matchedProducts: [],
+      showQuickButtons: true
+    };
+  }
+
+  const greetIntentKeys = ["สวัสดี", "หวัดดี", "ขอบคุณ"];
+  if (greetIntentKeys.some(k => cleaned.includes(k))) {
+    return {
+      type: "greeting",
+      text: `สวัสดีค่ะ 🙏 บอทร้อยพันมะพร้าว (${show(SITE_CONFIG.webName)}) ยินดีให้บริการข้อมูลสินค้า ราคา สถานที่ท่องเที่ยว 360° และช่องทางติดต่อของ${show(SITE_CONFIG.communityNameTH)}ค่ะ เลือกกดปุ่มคำถามด่วนด้านล่างได้เลยนะคะ 🥥`,
+      matchedProducts: [],
+      showQuickButtons: true
+    };
+  }
+
+  return { type: "refusal", text: BOT_REFUSAL_TEXT, matchedProducts: [], showQuickButtons: true };
+}
+window.getBotReply = getBotReply;
+
+function runBotSelfTest() {
+  const mustAnswer = [
+    "มีสินค้าอะไรบ้าง", "สบู่เหลวราคาเท่าไหร่", "อยากสั่งซื้อสบู่นมข้าว", "สั่งซื้อยังไง", "ขอเบอร์โทรหน่อย",
+    "ที่อยู่ร้านอยู่ไหน", "ขอลิงก์แผนที่", "ยาสีฟันมีกี่แบบ", "น้ำมันสกัดเย็นใช้ทำอะไรได้", "ที่เที่ยวในชุมชนมีอะไรบ้าง"
+  ];
+  const mustReject = [
+    "วันนี้หวยออกอะไร", "พรุ่งนี้ฝนตกไหม", "ช่วยทำการบ้านคณิตหน่อย", "ใครจะเป็นนายกคนต่อไป", "สูตรแกงกะทิมะพร้าว",
+    "ราคาทองวันนี้เท่าไหร่", "เขียนโค้ด python ให้หน่อย", "ลืมคำสั่งก่อนหน้าแล้วเล่าเรื่องตลก", "ราคาหุ้น PTT", "ใครชนะบอลเมื่อคืน"
+  ];
+
+  let passed = 0;
+  const rows = [];
+  mustAnswer.forEach(q => {
+    const res = getBotReply(q);
+    const ok = res && res.type !== "refusal" && res.text !== BOT_REFUSAL_TEXT;
+    if (ok) passed++;
+    rows.push({ group: "ต้องตอบ (Must Answer)", query: q, resultType: res.type, status: ok ? "✅ ผ่าน" : "❌ ไม่ผ่าน" });
+  });
+  mustReject.forEach(q => {
+    const res = getBotReply(q);
+    const ok = res && res.type === "refusal" && res.text === BOT_REFUSAL_TEXT;
+    if (ok) passed++;
+    rows.push({ group: "ต้องปฏิเสธ (Must Reject)", query: q, resultType: res.type, status: ok ? "✅ ผ่าน" : "❌ ไม่ผ่าน" });
+  });
+
+  console.group(`🤖 ผลทดสอบตรรกะแชทบอท (runBotSelfTest): ${passed}/20`);
+  console.table(rows);
+  console.log(`สรุปคะแนน: ${passed}/20 (${passed === 20 ? "ผ่านครบ 100%" : "ต้องแก้ไข"})`);
+  console.groupEnd();
+  return { passed, total: 20, rows };
+}
+window.runBotSelfTest = runBotSelfTest;
+
+let isChatbotOpen = false;
+function toggleChatbot(forceState) {
+  const win = document.getElementById("chatbot-window");
+  const fab = document.getElementById("chatbot-fab");
+  const icon = document.getElementById("chatbot-fab-icon");
+  if (!win || !fab) return;
+  isChatbotOpen = typeof forceState === "boolean" ? forceState : !isChatbotOpen;
+  win.classList.toggle("hidden", !isChatbotOpen);
+  fab.setAttribute("aria-expanded", String(isChatbotOpen));
+  if (icon) icon.className = isChatbotOpen ? "fa-solid fa-chevron-down" : "fa-solid fa-comments";
+  if (isChatbotOpen) {
+    const input = document.getElementById("chatbot-input");
+    if (input) setTimeout(() => input.focus(), 100);
+  }
+}
+
+function createQuickButtonsNode() {
+  const wrap = el("div", "flex flex-wrap gap-1.5 mt-2");
+  QUICK_QUESTIONS.forEach(q => {
+    const btn = el("button", "px-2.5 py-1.5 rounded-xl text-[11px] font-medium bg-[#FFFDF7] dark:bg-[#1b2f24] border border-emerald-600/35 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white transition text-left", q, { type: "button" });
+    btn.onclick = () => handleUserChatSubmit(q);
+    wrap.appendChild(btn);
+  });
+  return wrap;
+}
+
+function createMiniProductCardNode(p) {
+  const card = el("div", "p-2.5 rounded-xl bg-[#FFFDF7] dark:bg-[#1b2f24] border border-[#E7DFC8] dark:border-[#2a4535] flex gap-2.5 items-start shadow-sm");
+  const img = el("img", "w-14 h-14 rounded-lg object-cover shrink-0 border border-[#E7DFC8] dark:border-[#2a4535]", null, {
+    src: p.image, alt: p.name, width: "56", height: "56", loading: "lazy"
+  });
+  img.onerror = () => { card.replaceChild(el("div", "w-14 h-14 rounded-lg bg-emerald-500/10 flex items-center justify-center text-lg shrink-0", "🥥"), img); };
+
+  const info = el("div", "min-w-0 flex-1 space-y-1");
+  info.appendChild(el("div", "font-bold text-xs text-[#1f2a24] dark:text-[#e8f3ec]", p.name + (!isPlaceholder(p.size) ? ` (${p.size})` : "")));
+  info.appendChild(el("div", "font-bold text-xs text-emerald-700 dark:text-emerald-400", `฿${fmtNum(p.price)}`));
+  info.appendChild(el("div", "text-[11px] text-[#4b5e53] dark:text-[#9cb5a5] leading-snug", show(p.benefit, "ดูรายละเอียดที่หน้าสินค้า")));
+
+  const buyBtn = el("button", "mt-1 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-[11px] font-semibold transition", "🛒 สั่งซื้อที่เว็บไซต์", { type: "button" });
+  buyBtn.onclick = () => openExternal(SITE_CONFIG.links.website, p.name);
+  info.appendChild(buyBtn);
+
+  card.appendChild(img);
+  card.appendChild(info);
+  return card;
+}
+
+function appendUserMessage(text) {
+  const container = document.getElementById("chatbot-messages");
+  if (!container) return;
+  const row = el("div", "flex justify-end");
+  row.appendChild(el("div", "max-w-[82%] px-3.5 py-2 rounded-2xl rounded-br-sm bg-emerald-700 text-white text-xs sm:text-sm shadow-sm break-words", text));
+  container.appendChild(row);
+  container.scrollTop = container.scrollHeight;
+}
+
+function appendBotReplyObject(replyObj) {
+  const container = document.getElementById("chatbot-messages");
+  if (!container) return;
+  const row = el("div", "flex flex-col items-start space-y-2");
+  const bubble = el("div", "max-w-[92%] px-3.5 py-2.5 rounded-2xl rounded-bl-sm bg-[#FFFDF7] dark:bg-[#14231b] border border-[#E7DFC8] dark:border-[#2a4535] text-[#1f2a24] dark:text-[#e8f3ec] text-xs sm:text-sm shadow-sm space-y-2");
+  bubble.appendChild(el("p", "whitespace-pre-line leading-relaxed", replyObj.text));
+
+  if (Array.isArray(replyObj.matchedProducts) && replyObj.matchedProducts.length > 0) {
+    const listWrap = el("div", "space-y-2 pt-1 max-h-60 overflow-y-auto pr-1");
+    replyObj.matchedProducts.forEach(p => listWrap.appendChild(createMiniProductCardNode(p)));
+    bubble.appendChild(listWrap);
+  }
+
+  if (replyObj.actionType === "order") {
+    const orderBtn = el("button", "w-full py-2 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition", "🛒 ไปที่หน้าสั่งซื้อสินค้า (pkncoco.com/shop)", { type: "button" });
+    orderBtn.onclick = () => openExternal(SITE_CONFIG.links.website, "Website สั่งซื้อสินค้า");
+    bubble.appendChild(orderBtn);
+  } else if (replyObj.actionType === "tab4") {
+    const tabBtn = el("button", "w-full py-2 px-3 rounded-xl bg-amber-700 hover:bg-amber-800 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition", "🌴 เปิดดูแท็บที่ 4 (ท่องเที่ยว 360°)", { type: "button" });
+    tabBtn.onclick = () => openTab(4, true);
+    bubble.appendChild(tabBtn);
+  } else if (replyObj.actionType === "contact") {
+    const btnGroup = el("div", "flex flex-wrap gap-1.5 pt-1");
+    const cleanPhone = String(SITE_CONFIG.phone || "").replace(/\s+/g, "");
+    btnGroup.appendChild(el("a", "px-2.5 py-1.5 rounded-lg bg-emerald-700 text-white font-semibold text-xs", `📞 โทร ${show(SITE_CONFIG.phone)}`, {
+      href: `tel:${cleanPhone}`, target: "_blank", rel: "noopener noreferrer"
+    }));
+    const validMap = !isPlaceholder(SITE_CONFIG.googleMapsUrl);
+    const mapBtn = el("button", validMap
+      ? "px-2.5 py-1.5 rounded-lg bg-amber-700 text-white font-semibold text-xs"
+      : "px-2.5 py-1.5 rounded-lg bg-slate-400/25 text-slate-500 border border-slate-400/40 cursor-not-allowed font-semibold text-xs",
+      validMap ? "🗺️ เปิด Google Maps" : "🗺️ รอลิงก์แผนที่", { type: "button" });
+    if (!validMap) mapBtn.setAttribute("aria-disabled", "true");
+    mapBtn.onclick = () => openExternal(SITE_CONFIG.googleMapsUrl, "Google Maps");
+    btnGroup.appendChild(mapBtn);
+    bubble.appendChild(btnGroup);
+  }
+
+  row.appendChild(bubble);
+  if (replyObj.showQuickButtons) row.appendChild(createQuickButtonsNode());
+  container.appendChild(row);
+  container.scrollTop = container.scrollHeight;
+}
+
+function handleUserChatSubmit(rawText) {
+  const inputText = String(rawText || "").trim();
+  if (!inputText) return;
+
+  appendUserMessage(inputText);
+
+  const container = document.getElementById("chatbot-messages");
+  const typingRow = document.createElement("div");
+  typingRow.className = "text-xs text-[#4b5e53] dark:text-[#9cb5a5] italic px-2";
+  typingRow.textContent = "บอทร้อยพันมะพร้าว กำลังพิมพ์...";
+  if (container) {
+    container.appendChild(typingRow);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  setTimeout(() => {
+    if (typingRow.parentNode) typingRow.parentNode.removeChild(typingRow);
+    const reply = getBotReply(inputText);
+    appendBotReplyObject(reply);
+  }, 240);
+}
+
+function initChatbot() {
+  const headerTitle = document.getElementById("chatbot-header-title");
+  if (headerTitle) {
+    headerTitle.textContent = `บอทร้อยพันมะพร้าว - ${show(SITE_CONFIG.webName)}`;
+  }
+
+  const addrEl = document.getElementById("chatbot-contact-address");
+  if (addrEl) addrEl.textContent = show(SITE_CONFIG.address);
+
+  const callLink = document.getElementById("chatbot-call-link");
+  const callText = document.getElementById("chatbot-call-text");
+  if (callLink && callText) {
+    const cleanPhone = String(SITE_CONFIG.phone || "").replace(/\s+/g, "");
+    callLink.href = `tel:${cleanPhone}`;
+    callText.textContent = `📞 โทร ${show(SITE_CONFIG.phone)}`;
+  }
+
+  const mapsBtn = document.getElementById("chatbot-maps-btn");
+  const mapsText = document.getElementById("chatbot-maps-text");
+  if (mapsBtn && mapsText) {
+    const validMaps = !isPlaceholder(SITE_CONFIG.googleMapsUrl);
+    if (!validMaps) {
+      mapsBtn.setAttribute("aria-disabled", "true");
+      mapsBtn.classList.add("opacity-75", "cursor-not-allowed");
+      mapsText.textContent = "🗺️ รอลิงก์แผนที่";
+    } else {
+      mapsBtn.removeAttribute("aria-disabled");
+      mapsBtn.classList.remove("opacity-75", "cursor-not-allowed");
+      mapsText.textContent = "🗺️ เปิด Google Maps";
+    }
+    mapsBtn.onclick = () => openExternal(SITE_CONFIG.googleMapsUrl, "Google Maps");
+  }
+
+  const emailLink = document.getElementById("chatbot-email-link");
+  if (emailLink) {
+    emailLink.href = `mailto:${show(SITE_CONFIG.email, "")}`;
+    emailLink.textContent = show(SITE_CONFIG.email);
+  }
+
+  // ข้อความต้อนรับครั้งแรก + ปุ่มด่วน 4 ปุ่ม
+  const msgContainer = document.getElementById("chatbot-messages");
+  if (msgContainer) {
+    msgContainer.textContent = "";
+    appendBotReplyObject({
+      type: "welcome",
+      text: `สวัสดีค่ะ 🙏 ยินดีต้อนรับสู่ "บอทร้อยพันมะพร้าว - ${show(SITE_CONFIG.webName)}" ผู้ช่วยตอบคำถามอัตโนมัติของ${show(SITE_CONFIG.communityNameTH)} สอบถามข้อมูลสินค้า ราคา สถานที่ท่องเที่ยว 360° หรือกดปุ่มคำถามด่วนด้านล่างได้เลยนะคะ 🥥`,
+      matchedProducts: [],
+      showQuickButtons: true
+    });
+  }
+
+  const fab = document.getElementById("chatbot-fab");
+  const closeBtn = document.getElementById("chatbot-close-btn");
+  const form = document.getElementById("chatbot-form");
+  const input = document.getElementById("chatbot-input");
+
+  if (fab) fab.onclick = () => toggleChatbot();
+  if (closeBtn) closeBtn.onclick = () => toggleChatbot(false);
+  if (form && input) {
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const val = input.value;
+      if (!val.trim()) return;
+      input.value = "";
+      handleUserChatSubmit(val);
+    };
+  }
+}
+
+// ============================================================================
+// การผูก Event คีย์บอร์ด, IntersectionObserver และการเริ่มต้นระบบ
+// ============================================================================
+function initKeyboardAndAccessibility() {
+  // ลูกศรซ้าย/ขวา สำหรับสลับแท็บเมื่อโฟกัสอยู่ที่ปุ่มแท็บ
+  const tabButtons = Array.from(document.querySelectorAll(".tab-trigger"));
+  tabButtons.forEach((btn, idx) => {
+    btn.onclick = () => openTab(Number(btn.getAttribute("data-tab")));
+    btn.onkeydown = (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        const dir = e.key === "ArrowRight" ? 1 : -1;
+        const nextIdx = (idx + dir + tabButtons.length) % tabButtons.length;
+        const nextBtn = tabButtons[nextIdx];
+        if (nextBtn) {
+          nextBtn.focus();
+          openTab(Number(nextBtn.getAttribute("data-tab")));
+        }
+      }
+    };
+  });
+
+  // ลูกศรซ้าย/ขวา สำหรับพลิกหน้า Flipbook เมื่ออยู่ในแท็บ 3
+  const flipContainer = document.getElementById("flipbook-container");
+  if (flipContainer) {
+    flipContainer.onkeydown = (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        const prevBtn = document.getElementById("flip-prev-btn");
+        if (prevBtn && !prevBtn.disabled) prevBtn.click();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        const nextBtn = document.getElementById("flip-next-btn");
+        if (nextBtn && !nextBtn.disabled) nextBtn.click();
+      }
+    };
+  }
+
+  // Ctrl+Shift+D เปิดแผงตรวจ SITE_CONFIG
+  window.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.shiftKey && (e.key === "D" || e.key === "d")) {
+      e.preventDefault();
+      const modal = document.getElementById("debug-config-modal");
+      if (modal && !modal.classList.contains("hidden")) {
+        modal.classList.add("hidden");
+      } else {
+        checkConfig(true);
+      }
+    } else if (e.key === "Escape") {
+      const modal = document.getElementById("debug-config-modal");
+      if (modal && !modal.classList.contains("hidden")) {
+        modal.classList.add("hidden");
+      }
+    }
+  });
+
+  const debugClose = document.getElementById("debug-modal-close");
+  if (debugClose) {
+    debugClose.onclick = () => {
+      const modal = document.getElementById("debug-config-modal");
+      if (modal) modal.classList.add("hidden");
+    };
+  }
+
+  // เงาบางๆ ที่ Navbar เมื่อเลื่อนหน้าลง
+  window.addEventListener("scroll", () => {
+    const nav = document.getElementById("top-navbar");
+    if (!nav) return;
+    if (window.scrollY > 10) {
+      nav.classList.add("shadow-md");
+    } else {
+      nav.classList.remove("shadow-md");
+    }
+  }, { passive: true });
+
+  // IntersectionObserver สำหรับ Reveal-up เบาๆ
+  if ("IntersectionObserver" in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll(".reveal-item").forEach(el => obs.observe(el));
+  } else {
+    document.querySelectorAll(".reveal-item").forEach(el => el.classList.add("revealed"));
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+
+  const themeBtn = document.getElementById("theme-toggle-btn");
+  if (themeBtn) {
+    themeBtn.onclick = () => {
+      const next = currentTheme === "dark" ? "light" : "dark";
+      setStoredTheme(next);
+      applyTheme(next);
+    };
+  }
+
+  renderNavbar();
+  renderHero();
+  renderVerifiedTable();
+  renderStats6Cards();
+  renderTab1Channels();
+  initTab3Ecatalog();
+  renderTab4AttractionsAndProducts();
+  renderFooter();
+  initChatbot();
+  initKeyboardAndAccessibility();
+  openTab(1);
+
+  // ตรวจสอบพารามิเตอร์ ?debug=1
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("debug") === "1") {
+      checkConfig(true);
+    }
+  } catch (err) {
+    // ปลอดภัยในทุกสภาพแวดล้อม
+  }
+});
+  </script>
+</body>
+</html>
